@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple500</item>
-        <item name="colorPrimaryDark">@color/grey_trans</item>
-        <item name="colorAccent">@color/teal200</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/greyTransparent</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="fontFamily">@font/maisonneue_book</item>
         <item name="android:textColor">@color/greyTextColor</item>
     </style>
@@ -42,7 +42,7 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/collapsingToolBarGrey</item>
         <item name="colorAccent">@color/blue</item>
-        <item name="fontFamily">@font/maison_neue_book</item>
+        <item name="fontFamily">@font/maisonneue_book</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
