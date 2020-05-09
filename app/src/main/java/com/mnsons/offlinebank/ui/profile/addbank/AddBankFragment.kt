@@ -11,10 +11,11 @@ import com.mnsons.offlinebank.databinding.FragmentAddBankBinding
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
-import com.mnsons.offlinebank.utils.MultiSelectListener
+import com.mnsons.offlinebank.ui.adapters.BankSelectionListener
 import kotlinx.android.synthetic.main.fragment_add_bank.*
 
-class AddBankFragment : Fragment(), MultiSelectListener<BankModel> {
+class AddBankFragment : Fragment(),
+    BankSelectionListener<BankModel> {
 
     private lateinit var _binding: FragmentAddBankBinding
 
