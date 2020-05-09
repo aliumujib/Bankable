@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OfflineBank</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="error_fetching_gtbank_acc_balance">There was an error fetching your GTBank account balance</string>
+    <string name="fetch_gtbank_balance">Fetch GTBank Balance</string>
+</resources>
