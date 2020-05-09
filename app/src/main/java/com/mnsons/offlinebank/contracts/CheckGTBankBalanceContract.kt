@@ -3,13 +3,14 @@ package com.mnsons.offlinebank.contracts
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContract
 import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.base.BaseStringOnlyInputContract
 import java.security.InvalidParameterException
 
 
-class CheckGTBankBalanceContract : BaseStringOnlyInputContract<String>() {
+class CheckGTBankBalanceContract : ActivityResultContract<String,String>() {
 
     private lateinit var context: Context
     override fun createIntent(context: Context, input: String?): Intent {

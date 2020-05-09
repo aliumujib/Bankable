@@ -1,10 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple500</item>
-        <item name="colorPrimaryDark">@color/grey_trans</item>
-        <item name="colorAccent">@color/teal200</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/greyTransparent</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="fontFamily">@font/maisonneue_book</item>
         <item name="android:textColor">@color/greyTextColor</item>
     </style>
@@ -39,5 +39,17 @@
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">4dp</item>
         <item name="android:textCursorDrawable">@null</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/collapsingToolBarGrey</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="fontFamily">@font/maisonneue_book</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="OuterToolBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
