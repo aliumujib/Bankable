@@ -5,5 +5,5 @@
     <string name="title_profile">Profile</string>
     <string name="error_fetching_gtbank_acc_balance">There was an error fetching your GTBank account balance</string>
     <string name="fetch_gtbank_balance">Fetch GTBank Balance</string>
-    <string name="home_hello_intro">Hello Peter 😊, What do you want to do?</string>
+    <string name="home_hello_intro">Hello Peter 😊,\nWhat do you want to do?</string>
 </resources>
