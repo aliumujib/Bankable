@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.BankModel
@@ -11,7 +12,8 @@ import com.mnsons.offlinebank.utils.MultiSelectListener
 import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankSelectionAdapter(
-    private val multiSelectListener: MultiSelectListener<BankModel>
+    private val viewType: ViewType = ViewType.NORMAL,
+    private val multiSelectListener: MultiSelectListener<BankModel>? = null
 ) : RecyclerView.Adapter<BankSelectionAdapter.BankItemViewHolder>() {
 
     var all: MutableList<BankModel> = mutableListOf()
@@ -51,21 +53,33 @@ class BankSelectionAdapter(
 
         fun bind(bank: BankModel, isSelected: Boolean) {
             itemView.tvBankName.text = bank.bankName
-            itemView.ivCheckMark.isSelected = isSelected
 
-            itemView.itemBankContainer.strokeColor = if (isSelected) {
-                ContextCompat.getColor(itemView.context, R.color.blue)
-            } else {
-                ContextCompat.getColor(itemView.context, R.color.greyTrans)
-            }
+            if (viewType == ViewType.SELECTABLE) {
+                itemView.ivCheckMark.isSelected = isSelected
 
-            itemView.setOnClickListener {
-                if (isSelected) {
-                    multiSelectListener.deselect(bank)
+                itemView.itemBankContainer.strokeColor = if (isSelected) {
+                    ContextCompat.getColor(itemView.context, R.color.blue)
                 } else {
-                    multiSelectListener.select(bank)
+                    ContextCompat.getColor(itemView.context, R.color.greyTrans)
                 }
+
+                itemView.setOnClickListener {
+                    if (isSelected) {
+                        multiSelectListener?.deselect(bank)
+                    } else {
+                        multiSelectListener?.select(bank)
+                    }
+                }
+            } else {
+                itemView.ivCheckMark.visibility = View.INVISIBLE
+                itemView.ivEllipses.visibility = View.VISIBLE
             }
+
         }
+    }
+
+    enum class ViewType {
+        NORMAL,
+        SELECTABLE
     }
 }

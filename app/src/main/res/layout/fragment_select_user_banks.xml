@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.selectuserbanks.SelectUserBanksFragment">
+    tools:context=".ui.onboarding.selectuserbanks.SelectUserBanksFragment">
 
     <TextView
         android:id="@+id/tvFirstName"
@@ -66,17 +66,6 @@
             android:textSize="16sp" />
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnNext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        android:layout_margin="16dp"
-        style="@style/ActionButtonTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBanks"
         android:layout_width="0dp"
@@ -92,4 +81,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchContainer" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:text="@string/next"
+        android:layout_margin="16dp"
+        style="@style/ActionButtonTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

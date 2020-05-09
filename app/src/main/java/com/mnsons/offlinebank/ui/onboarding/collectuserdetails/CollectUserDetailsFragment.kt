@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.collectuserdetails
+package com.mnsons.offlinebank.ui.onboarding.collectuserdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater

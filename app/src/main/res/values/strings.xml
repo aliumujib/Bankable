@@ -15,4 +15,7 @@
     <string name="home_hello_intro">Hello Peter 😊,\nWhat do you want to do?</string>
     <string name="search_for_bank">Search for your bank</string>
     <string name="what_banks_do_you_currently_use">What banks do you currently use?</string>
+    <string name="setting_up_for_you">Setting up for you...</string>
+    <string name="all_done">All Done!</string>
+    <string name="add_a_bank">Add a Bank</string>
 </resources>
