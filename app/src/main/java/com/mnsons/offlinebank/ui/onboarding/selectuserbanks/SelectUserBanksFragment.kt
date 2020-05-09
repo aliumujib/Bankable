@@ -12,10 +12,11 @@ import com.mnsons.offlinebank.databinding.FragmentSelectUserBanksBinding
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
-import com.mnsons.offlinebank.utils.MultiSelectListener
+import com.mnsons.offlinebank.ui.adapters.BankSelectionListener
 import kotlinx.android.synthetic.main.fragment_select_user_banks.*
 
-class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
+class SelectUserBanksFragment : Fragment(),
+    BankSelectionListener<BankModel> {
 
     private lateinit var _binding: FragmentSelectUserBanksBinding
 

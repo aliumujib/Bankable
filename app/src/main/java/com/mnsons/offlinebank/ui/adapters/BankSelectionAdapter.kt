@@ -7,12 +7,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.utils.MultiSelectListener
 import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankSelectionAdapter(
     private val viewType: ViewType = ViewType.NORMAL,
-    private val multiSelectListener: MultiSelectListener<BankModel>? = null
+    private val bankSelectionListener: BankSelectionListener<BankModel>? = null
 ) : RecyclerView.Adapter<BankSelectionAdapter.BankItemViewHolder>() {
 
     var all: MutableList<BankModel> = mutableListOf()
@@ -64,9 +63,9 @@ class BankSelectionAdapter(
 
                 itemView.setOnClickListener {
                     if (isSelected) {
-                        multiSelectListener?.deselect(bank)
+                        bankSelectionListener?.deselect(bank)
                     } else {
-                        multiSelectListener?.select(bank)
+                        bankSelectionListener?.select(bank)
                     }
                 }
             } else {
