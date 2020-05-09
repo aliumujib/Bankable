@@ -16,7 +16,7 @@
 package com.mnsons.offlinebank.di.components
 
 import android.content.Context
-import com.aliumujib.artic.di.modules.ContextModule
+import com.mnsons.offlinebank.di.modules.ContextModule
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.di.modules.RemoteModule

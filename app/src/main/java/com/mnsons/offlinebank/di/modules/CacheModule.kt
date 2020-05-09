@@ -32,19 +32,6 @@ class CacheModule {
 
     @Singleton
     @Provides
-    fun providesArticlesCache(articlesCache: BanksCache): BanksCache {
-        return articlesCache
-    }
-
-    @Singleton
-    @Provides
-    fun providesSettingsCache(settingsCache: SettingsCache): SettingsCache {
-        return settingsCache
-    }
-
-
-    @Singleton
-    @Provides
     fun providesBanksDao(dBClass: DBClass): BanksDao {
         return dBClass.banksDao()
     }

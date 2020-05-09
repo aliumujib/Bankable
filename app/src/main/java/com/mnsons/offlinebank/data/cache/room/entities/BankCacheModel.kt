@@ -16,9 +16,11 @@
 package com.mnsons.offlinebank.data.cache.room.entities
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "BANKS")
 data class BankCacheModel(
+    @PrimaryKey
     var id: Int,
     var slug: String,
     var name: String,

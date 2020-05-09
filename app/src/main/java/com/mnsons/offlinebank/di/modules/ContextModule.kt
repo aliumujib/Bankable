@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.aliumujib.artic.di.modules
+package com.mnsons.offlinebank.di.modules
 
 import android.app.Application
 import android.content.Context
