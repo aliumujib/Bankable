@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.mnsons.offlinebank.MainActivity
-import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.databinding.FragmentSelectUserBanksBinding
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
@@ -16,6 +16,8 @@ import com.mnsons.offlinebank.utils.MultiSelectListener
 import kotlinx.android.synthetic.main.fragment_select_user_banks.*
 
 class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
+
+    private lateinit var _binding: FragmentSelectUserBanksBinding
 
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(
@@ -30,27 +32,29 @@ class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_select_user_banks, container, false)
+        _binding = FragmentSelectUserBanksBinding.inflate(inflater, container, false)
+
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvFirstName.text = "Quadri,"
+        _binding.tvFirstName.text = "Quadri,"
 
-        rvBanks.adapter = bankSelectionAdapter
+        _binding.rvBanks.adapter = bankSelectionAdapter
 
-        searchContainer.setOnClickListener {
-            search_hint.visibility = View.GONE
-            search_bar.isIconified = !search_bar.isIconified
+        _binding.searchContainer.setOnClickListener {
+            _binding.searchHint.visibility = View.GONE
+            _binding.searchBar.isIconified = !search_bar.isIconified
         }
 
-        search_bar.setOnCloseListener {
-            search_hint.visibility = View.VISIBLE
+        _binding.searchBar.setOnCloseListener {
+            _binding.searchHint.visibility = View.VISIBLE
             return@setOnCloseListener false
         }
 
-        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        _binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -60,7 +64,7 @@ class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
             }
         })
 
-        btnNext.setOnClickListener {
+        _binding.btnNext.setOnClickListener {
             startActivity(Intent(context, MainActivity::class.java))
             activity?.finish()
         }

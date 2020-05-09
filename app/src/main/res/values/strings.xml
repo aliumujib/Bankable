@@ -13,6 +13,12 @@
     <string name="phone_number">Phone number</string>
     <string name="next">Next</string>
     <string name="home_hello_intro">Hello Peter 😊,\nWhat do you want to do?</string>
+    <string name="transfer_funds">Transfer Money</string>
+    <string name="buy_airtime">Buy Airtime</string>
+    <string name="buy_internet">Buy Data</string>
+
+    <string name="pay_bills"><![CDATA["Pay Bills <small><font color=\'#5F6578\'>(Utilities, Sports & Gaming, Pay TV, etc) </font></small>"]]></string>
+    <string name="check_balance">Check Account Balance</string>
     <string name="search_for_bank">Search for your bank</string>
     <string name="what_banks_do_you_currently_use">What banks do you currently use?</string>
     <string name="setting_up_for_you">Setting up for you...</string>

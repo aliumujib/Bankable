@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.databinding.FragmentUserDetailsBinding
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
-import kotlinx.android.synthetic.main.fragment_user_details.*
 
 class UserDetailsFragment : Fragment() {
+
+    private lateinit var _binding: FragmentUserDetailsBinding
 
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter().apply {
@@ -23,18 +25,20 @@ class UserDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_user_details, container, false)
+        _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
+
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvUserFullName.text = "Quadri Anifowose"
-        tvUserPhoneNumber.text = "08177175473"
+        _binding.tvUserFullName.text = "Quadri Anifowose"
+        _binding.tvUserPhoneNumber.text = "08177175473"
 
-        rvSelectedBanks.adapter = bankSelectionAdapter
+        _binding.rvSelectedBanks.adapter = bankSelectionAdapter
 
-        btnAddBank.setOnClickListener {
+        _binding.btnAddBank.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_navigation_add_bank)
         }
     }

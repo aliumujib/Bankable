@@ -24,10 +24,12 @@ import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
 import androidx.annotation.ColorRes
+import androidx.core.view.children
 
 internal val View.inflater: LayoutInflater get() = LayoutInflater.from(context)
 
@@ -81,6 +83,15 @@ fun View.slideDown() {
     animate.duration = 500
     this.startAnimation(animate)
     this.visibility = View.GONE
+}
+
+fun ViewGroup.recursivelyApplyToChildren(function: (child: View) -> Unit) {
+    this.children.forEach {
+        function.invoke(it)
+        if (it is ViewGroup) {
+            it.recursivelyApplyToChildren(function)
+        }
+    }
 }
 
 fun Any.animateBetweenColors(start: Int, end: Int, function: (animatedValue: Int) -> Unit) {
