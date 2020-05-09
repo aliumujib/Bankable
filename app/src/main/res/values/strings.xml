@@ -5,4 +5,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="error_fetching_gtbank_acc_balance">There was an error fetching your GTBank account balance</string>
     <string name="fetch_gtbank_balance">Fetch GTBank Balance</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="greeting_text">Hello 👋🏾,\n\nLet’s know who you are.</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="next">Next</string>
 </resources>
