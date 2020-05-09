@@ -15,6 +15,7 @@
             android:value="bc003dd2674d333f8960ffbf26a7201b" />
 
         <activity android:name=".OnBoardingActivity"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.OfflineBank.NoActionBar">
 
             <intent-filter>

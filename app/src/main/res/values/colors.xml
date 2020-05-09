@@ -5,7 +5,9 @@
     <color name="purple700">#3700B3</color>
     <color name="teal200">#03DAC5</color>
     <color name="blue">#3274F5</color>
-    <color name="greyTextColor">#5F6578</color>
-    <color name="grey_trans">#C7C7C7</color>
+    <color name="greyLight">#5F6578</color>
+    <color name="greyTrans">#C7C7C7</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="searchBackground">#34C7C7C7</color>
 </resources>
