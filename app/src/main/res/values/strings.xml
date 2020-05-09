@@ -18,4 +18,6 @@
     <string name="setting_up_for_you">Setting up for you...</string>
     <string name="all_done">All Done!</string>
     <string name="add_a_bank">Add a Bank</string>
+    <string name="your_banks">Your Banks</string>
+    <string name="add_to_my_banks">Add to my banks</string>
 </resources>

@@ -1,21 +1,20 @@
-package com.mnsons.offlinebank.ui.onboarding.selectuserbanks
+package com.mnsons.offlinebank.ui.profile.addbank
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import com.mnsons.offlinebank.MainActivity
+import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.utils.MultiSelectListener
-import kotlinx.android.synthetic.main.fragment_select_user_banks.*
+import kotlinx.android.synthetic.main.fragment_add_bank.*
 
-class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
+class AddBankFragment : Fragment(), MultiSelectListener<BankModel> {
 
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(
@@ -23,6 +22,7 @@ class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
             this
         ).apply {
             all = DummyData.banks
+            selected = DummyData.banks.subList(0, 1)
         }
     }
 
@@ -30,13 +30,13 @@ class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_select_user_banks, container, false)
+        return inflater.inflate(R.layout.fragment_add_bank, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvFirstName.text = "Quadri,"
+        rvBanks.adapter = bankSelectionAdapter
 
         rvBanks.adapter = bankSelectionAdapter
 
@@ -60,11 +60,9 @@ class SelectUserBanksFragment : Fragment(), MultiSelectListener<BankModel> {
             }
         })
 
-        btnNext.setOnClickListener {
-            startActivity(Intent(context, MainActivity::class.java))
-            activity?.finish()
+        btnAddToMyBanks.setOnClickListener {
+            findNavController().navigateUp()
         }
-
     }
 
     override fun select(item: BankModel) {

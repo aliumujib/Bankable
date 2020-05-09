@@ -1,10 +1,11 @@
-package com.mnsons.offlinebank.ui.profile
+package com.mnsons.offlinebank.ui.profile.userdetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
@@ -34,7 +35,7 @@ class UserDetailsFragment : Fragment() {
         rvSelectedBanks.adapter = bankSelectionAdapter
 
         btnAddBank.setOnClickListener {
-
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_add_bank)
         }
     }
 

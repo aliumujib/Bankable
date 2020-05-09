@@ -17,11 +17,17 @@ package com.mnsons.offlinebank.utils.ext
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
+import android.app.Activity
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
+import androidx.annotation.ColorRes
 
 internal val View.inflater: LayoutInflater get() = LayoutInflater.from(context)
 
@@ -51,7 +57,6 @@ fun View.show() {
 }
 
 
-
 // slide the view from below itself to the current position
 fun View.slideUp() {
     this.visibility = View.VISIBLE
@@ -76,4 +81,25 @@ fun View.slideDown() {
     animate.duration = 500
     this.startAnimation(animate)
     this.visibility = View.GONE
+}
+
+fun Any.animateBetweenColors(start: Int, end: Int, function: (animatedValue: Int) -> Unit) {
+    val animator = ValueAnimator.ofObject(
+        ArgbEvaluator(),
+        start,
+        end
+    )
+    animator.duration = 500 // milliseconds
+    animator.addUpdateListener { valueAnimator ->
+        function.invoke(valueAnimator.animatedValue as @kotlin.ParameterName(name = "animatedValue") Int)
+    }
+    animator.start()
+}
+
+fun Activity.animateStatusBarColorChangeTo(@ColorRes endColor: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        animateBetweenColors(window.statusBarColor, Color.parseColor(getColorHexString(endColor))) {
+            window.statusBarColor = it
+        }
+    }
 }

@@ -22,7 +22,9 @@ class CollectUserDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_collectUserDetailsFragment_to_selectUserBanksFragment)
+            findNavController().navigate(
+                R.id.action_navigation_collect_user_details_to_navigation_select_user_banks
+            )
         }
     }
 

@@ -60,7 +60,7 @@ class BankSelectionAdapter(
                 itemView.itemBankContainer.strokeColor = if (isSelected) {
                     ContextCompat.getColor(itemView.context, R.color.blue)
                 } else {
-                    ContextCompat.getColor(itemView.context, R.color.greyTrans)
+                    ContextCompat.getColor(itemView.context, R.color.greyTransparent)
                 }
 
                 itemView.setOnClickListener {
