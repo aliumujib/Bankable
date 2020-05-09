@@ -3,27 +3,18 @@ package com.mnsons.offlinebank
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.Hover.DownloadListener
 import com.mnsons.offlinebank.databinding.ActivityMainBinding
-import com.mnsons.offlinebank.utils.ext.hide
-import com.mnsons.offlinebank.utils.ext.show
-import com.mnsons.offlinebank.utils.ext.slideDown
-import com.mnsons.offlinebank.utils.ext.slideUp
-import java.util.ArrayList
+import com.mnsons.offlinebank.utils.ext.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,11 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         }, this)
 
-
         setUpNavDestinationChangeListener()
     }
 
-    inner class DestinationChangeListener() : NavController.OnDestinationChangedListener {
+    inner class DestinationChangeListener : NavController.OnDestinationChangedListener {
         override fun onDestinationChanged(
             controller: NavController,
             destination: NavDestination,
@@ -64,9 +54,11 @@ class MainActivity : AppCompatActivity() {
             binding.toolbar.title = destination.label
             if (topLevelDestinationIds.contains(destination.id).not()) {
                 hideBottomTabs()
+                animateStatusBarColorChangeTo(R.color.white)
                 binding.toolbar.show()
             } else {
                 binding.toolbar.hide()
+                animateStatusBarColorChangeTo(R.color.cardBorderGrey)
                 showBottomTabs()
             }
         }

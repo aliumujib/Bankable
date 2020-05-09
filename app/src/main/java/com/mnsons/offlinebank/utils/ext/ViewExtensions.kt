@@ -17,12 +17,18 @@ package com.mnsons.offlinebank.utils.ext
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
+import android.app.Activity
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
+import androidx.annotation.ColorRes
 import androidx.core.view.children
 
 internal val View.inflater: LayoutInflater get() = LayoutInflater.from(context)
@@ -84,6 +90,27 @@ fun ViewGroup.recursivelyApplyToChildren(function: (child: View) -> Unit) {
         function.invoke(it)
         if (it is ViewGroup) {
             it.recursivelyApplyToChildren(function)
+        }
+    }
+}
+
+fun Any.animateBetweenColors(start: Int, end: Int, function: (animatedValue: Int) -> Unit) {
+    val animator = ValueAnimator.ofObject(
+        ArgbEvaluator(),
+        start,
+        end
+    )
+    animator.duration = 500 // milliseconds
+    animator.addUpdateListener { valueAnimator ->
+        function.invoke(valueAnimator.animatedValue as @kotlin.ParameterName(name = "animatedValue") Int)
+    }
+    animator.start()
+}
+
+fun Activity.animateStatusBarColorChangeTo(@ColorRes endColor: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        animateBetweenColors(window.statusBarColor, Color.parseColor(getColorHexString(endColor))) {
+            window.statusBarColor = it
         }
     }
 }

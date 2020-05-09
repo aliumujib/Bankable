@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.collectuserdetails.CollectUserDetailsFragment">
+    tools:context=".ui.onboarding.collectuserdetails.CollectUserDetailsFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -78,7 +78,6 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNext"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:text="@string/next"
         android:layout_margin="16dp"
         style="@style/ActionButtonTheme"

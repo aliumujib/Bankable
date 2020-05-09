@@ -19,8 +19,22 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.mnsons.offlinebank.ui.notifications.NotificationsFragment"
+        android:name="com.mnsons.offlinebank.ui.profile.userdetails.UserDetailsFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_user_details" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_add_bank"
+            app:destination="@id/navigation_add_bank"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_add_bank"
+        android:name="com.mnsons.offlinebank.ui.profile.addbank.AddBankFragment"
+        android:label="Add a Bank"
+        tools:layout="@layout/fragment_add_bank" />
 
 </navigation>

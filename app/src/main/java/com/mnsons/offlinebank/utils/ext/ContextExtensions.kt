@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.aliumujib.artic.views.ext
+package com.mnsons.offlinebank.utils.ext
 
 import android.content.Context
 import android.util.DisplayMetrics
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 
 /**
@@ -37,4 +39,9 @@ fun Context.getString(@StringRes resId: Int?) =
 fun Context.dpToPx(dp: Int): Int {
     var displayMetrics = resources.displayMetrics
     return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+}
+
+fun Context.getColorHexString(@ColorRes resId: Int): String {
+    val colorInt = ContextCompat.getColor(this, resId)
+    return String.format("#%06X", 0xFFFFFF and colorInt)
 }
