@@ -44,10 +44,6 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        textView.setOnClickListener {
-//            gtBankBalanceCall.launch("19142a42")
-//        }
-
         return _binding.root
     }
 
@@ -89,7 +85,9 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     }
 
     override fun onMenuActionClick(model: MenuAction) {
-
+        if (model.id == 5) {
+            gtBankBalanceCall.launch("19142a42")
+        }
     }
 
 }
