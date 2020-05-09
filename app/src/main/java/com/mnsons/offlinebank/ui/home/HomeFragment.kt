@@ -10,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import androidx.recyclerview.widget.RecyclerView
-import com.aliumujib.artic.views.ext.dpToPx
 import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.ui.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.home.menu.MenuAdapter
+import com.mnsons.offlinebank.utils.ext.dpToPx
 import io.cabriole.decorator.GridSpanMarginDecoration
 
 
