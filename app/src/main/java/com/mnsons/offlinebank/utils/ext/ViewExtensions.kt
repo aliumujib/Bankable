@@ -19,9 +19,11 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
+import androidx.core.view.children
 
 internal val View.inflater: LayoutInflater get() = LayoutInflater.from(context)
 
@@ -51,7 +53,6 @@ fun View.show() {
 }
 
 
-
 // slide the view from below itself to the current position
 fun View.slideUp() {
     this.visibility = View.VISIBLE
@@ -76,4 +77,13 @@ fun View.slideDown() {
     animate.duration = 500
     this.startAnimation(animate)
     this.visibility = View.GONE
+}
+
+fun ViewGroup.recursivelyApplyToChildren(function: (child: View) -> Unit) {
+    this.children.forEach {
+        function.invoke(it)
+        if (it is ViewGroup) {
+            it.recursivelyApplyToChildren(function)
+        }
+    }
 }
