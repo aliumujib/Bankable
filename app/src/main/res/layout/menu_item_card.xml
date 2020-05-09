@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/menu_card_height"
+    app:cardBackgroundColor="@color/white"
+    app:strokeWidth="1dp"
+    android:id="@+id/parent"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="@dimen/half_space"
+    tools:layout_margin="@dimen/two_space">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/card_icon_height_width"
+            android:layout_height="@dimen/card_icon_height_width"
+            android:layout_gravity="start|center"
+            android:id="@+id/icon"
+            android:layout_marginStart="@dimen/two_space"
+            android:text="@string/title_home"
+            tools:src="@drawable/transfer" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/MenuItemCardTitle"
+            android:id="@+id/title"
+            android:layout_marginStart="@dimen/two_space"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:text="@string/title_home" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
