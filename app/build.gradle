@@ -35,7 +35,7 @@ android {
 
 dependencies {
 
-    implementation 'com.hover:android-sdk:1.5.2'
+    implementation 'com.hover:android-sdk:1.5.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.activity:activity-ktx:$activity_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
