@@ -32,14 +32,12 @@ class HomeFragment : Fragment() {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: Button = root.findViewById(R.id.text_home)
 
-        textView.setOnClickListener {
-            gtBankBalanceCall.launch("19142a42")
-        }
+//        textView.setOnClickListener {
+//            gtBankBalanceCall.launch("19142a42")
+//        }
 
         return root
     }
-
 
 }
