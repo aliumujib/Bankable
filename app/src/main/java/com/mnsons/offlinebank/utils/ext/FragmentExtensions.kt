@@ -15,6 +15,7 @@
  */
 package com.mnsons.offlinebank.utils.ext
 
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -45,4 +46,15 @@ fun <VM : ViewModel> Fragment.viewModel(
     } else {
         ViewModelProviders.of(this, viewModelProviderFactory).get(factoryViewModel::class.java)
     }
+}
+
+fun Fragment.onBackPressed(block: () -> Unit) {
+    requireActivity().onBackPressedDispatcher.addCallback(
+        this,
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                block.invoke()
+            }
+        }
+    )
 }

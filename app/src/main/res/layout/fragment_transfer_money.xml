@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.transfermoney.TransferMoneyFragment">
+
+    <include
+        android:id="@+id/transferDetailsContainer"
+        layout="@layout/layout_transfer_money_details" />
+
+    <include
+        android:id="@+id/selectBankContainer"
+        layout="@layout/layout_select_bank" />
+
+    <include
+        android:id="@+id/transferPinContainer"
+        layout="@layout/layout_enter_ussd_pin" />
+
+    <include
+        android:id="@+id/saveTransferBeneficiaryContainer"
+        layout="@layout/layout_save_as_beneficiary" />
+</ViewFlipper>

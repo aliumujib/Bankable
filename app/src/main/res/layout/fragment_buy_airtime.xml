@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.buyairtime.BuyAirtimeFragment">
+
+    <include
+        android:id="@+id/airtimeDetailsContainer"
+        layout="@layout/layout_buy_airtime_details" />
+
+    <include
+        android:id="@+id/airtimePinContainer"
+        layout="@layout/layout_enter_ussd_pin" />
+
+    <include
+        android:id="@+id/saveAirtimeBeneficiaryContainer"
+        layout="@layout/layout_save_as_beneficiary" />
+</ViewFlipper>
