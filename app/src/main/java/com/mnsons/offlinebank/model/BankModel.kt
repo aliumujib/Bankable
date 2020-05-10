@@ -1,8 +1,11 @@
 package com.mnsons.offlinebank.model
 
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class BankModel(
     val bankName: Int,
     var id: Int,
@@ -10,5 +13,5 @@ data class BankModel(
     var sortCode: String,
     @DrawableRes
     val bankLogo: Int
-)
+) : Parcelable
 
