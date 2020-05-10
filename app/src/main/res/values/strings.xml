@@ -37,4 +37,9 @@
     <string name="accessbank">Access Bank</string>
     <string name="zenith_bank">Zenith Bank</string>
     <string name="uba">United Bank Of Africa</string>
+    <string name="select_a_bank">Select a bank</string>
+    <string name="close">Close</string>
+    <string name="transaction_success_message">Your transaction has been \ncompleted successfully</string>
+    <string name="failed_transaction_message">Your transaction failed.\nPlease try again later.</string>
+    <string name="your_account_balance_s_are">Your account balance(s) are:</string>
 </resources>
