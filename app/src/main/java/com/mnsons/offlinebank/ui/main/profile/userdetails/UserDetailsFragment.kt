@@ -1,26 +1,18 @@
 package com.mnsons.offlinebank.ui.main.profile.userdetails
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.mnsons.offlinebank.ApplicationClass
-import com.mnsons.offlinebank.ApplicationClass.Companion.coreComponent
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentUserDetailsBinding
-import com.mnsons.offlinebank.di.main.DaggerMainComponent
-import com.mnsons.offlinebank.di.main.MainModule
 import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
-import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
-import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import javax.inject.Inject
 
@@ -64,7 +56,6 @@ class UserDetailsFragment : Fragment() {
             mainState.user?.let {
                 _binding.tvUserFullName.text = "${it.firstName} ${it.lastName}"
                 _binding.tvUserPhoneNumber.text = it.phoneNumber
-                Log.d(UserDetailsFragment::class.java.simpleName, it.banks.toString())
                 bankSelectionAdapter.all = it.banks
                 _binding.rvSelectedBanks.adapter = bankSelectionAdapter
             }

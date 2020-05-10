@@ -1,7 +1,6 @@
 package com.mnsons.offlinebank.ui.main
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,15 +14,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.Hover.DownloadListener
-import com.mnsons.offlinebank.ApplicationClass
 import com.mnsons.offlinebank.ApplicationClass.Companion.coreComponent
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.ActivityMainBinding
 import com.mnsons.offlinebank.di.main.DaggerMainComponent
 import com.mnsons.offlinebank.di.main.MainComponent
 import com.mnsons.offlinebank.di.main.MainModule
-import com.mnsons.offlinebank.di.onboarding.DaggerOnBoardingComponent
-import com.mnsons.offlinebank.di.onboarding.OnBoardingModule
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
@@ -45,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         R.id.navigation_activity,
         R.id.navigation_profile
     )
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

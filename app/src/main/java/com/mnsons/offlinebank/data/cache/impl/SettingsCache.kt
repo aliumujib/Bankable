@@ -34,8 +34,8 @@ class SettingsCache @Inject constructor(val context: Context) : CoreSharedPrefMa
     }
 
     companion object {
-        private val USER_FIRST_NAME = "USER_FIRST_NAME"
-        private val USER_LAST_NAME = "USER_LAST_NAME"
-        private val USER_PHONE = "USER_PHONE"
+        private const val USER_FIRST_NAME = "USER_FIRST_NAME"
+        private const val USER_LAST_NAME = "USER_LAST_NAME"
+        private const val USER_PHONE = "USER_PHONE"
     }
 }

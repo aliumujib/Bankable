@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
-import com.mnsons.offlinebank.model.User
-import com.mnsons.offlinebank.model.mapInto
-import com.mnsons.offlinebank.model.toBankModel
+import com.mnsons.offlinebank.model.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -21,17 +20,16 @@ class MainViewModel @Inject constructor(
     private val _state = MutableLiveData<MainState>()
     val state: LiveData<MainState> = _state
 
-
     init {
         if (settingsCache.userDataExists()) {
             banksCache.getBanks()
-                .onEach {
+                .onEach { banks ->
                     _state.value = MainState.Idle(
                         User(
                             settingsCache.fetchUserFirstName()!!,
                             settingsCache.fetchUserLastName()!!,
                             settingsCache.fetchUserPhone()!!,
-                            it.mapInto {
+                            banks.mapInto {
                                 it.toBankModel()
                             }
                         )
@@ -41,7 +39,34 @@ class MainViewModel @Inject constructor(
         } else {
             _state.value = MainState.LoggedOut
         }
+    }
 
+    fun updateUserBanks(banks: List<BankModel>) {
+        if (banks.isEmpty()) {
+            _state.value = MainState.Error(Throwable("Please select at least one bank"))
+        } else {
+            if (settingsCache.userDataExists()) {
+                _state.value = MainState.Editing(
+                    User(
+                        settingsCache.fetchUserFirstName()!!,
+                        settingsCache.fetchUserLastName()!!,
+                        settingsCache.fetchUserPhone()!!,
+                        banks
+                    )
+                )
+
+                viewModelScope.launch {
+                    banksCache.clearBanks()
+                    banksCache.saveBanks(
+                        banks.mapInto {
+                            it.toBankCacheModel()
+                        }
+                    )
+                }
+            } else {
+                _state.value = MainState.LoggedOut
+            }
+        }
     }
 
 }
