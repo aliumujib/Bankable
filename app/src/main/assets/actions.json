@@ -1,0 +1,68 @@
+{
+  "Transfer Money": [
+    {
+      "bankName": "GT Bank",
+      "bankRootCode": "*737#",
+      "hoverActionId": "",
+      "setup": [
+        "Dial RootCode",
+        "Select Option 5"
+      ],
+      "steps": [
+        "Enter Amount",
+        "Enter Account Number",
+        "Display Menu Select Recipient Bank",
+        "Enter Pin",
+        "Display Menu Save Beneficiary"
+      ]
+    },
+    {
+      "bankName": "Union Bank",
+      "bankRootCode": "*826#",
+      "hoverActionId": "",
+      "setup": [
+        "Dial RootCode",
+        "Select Option 5"
+      ],
+      "steps": [
+        "Enter Amount",
+        "Enter Account Number",
+        "Display Menu Select Recipient Bank",
+        "Enter Pin",
+        "Display Menu Save Beneficiary"
+      ]
+    }
+  ],
+  "Buy Airtime": [
+    {
+      "bankName": "GT Bank",
+      "bankRootCode": "*737#",
+      "hoverActionId": "",
+      "setup": [
+        "Dial RootCode",
+        "Select Option 2"
+      ],
+      "steps": [
+        "Enter Phone Number",
+        "Enter Amount",
+        "Enter Pin",
+        "Display Menu Save Beneficiary"
+      ]
+    },
+    {
+      "bankName": "Union Bank",
+      "bankRootCode": "*826#",
+      "hoverActionId": "",
+      "setup": [
+        "Dial RootCode",
+        "Select Option 2"
+      ],
+      "steps": [
+        "Enter Phone Number",
+        "Enter Amount",
+        "Enter Pin",
+        "Display Menu Save Beneficiary"
+      ]
+    }
+  ]
+}

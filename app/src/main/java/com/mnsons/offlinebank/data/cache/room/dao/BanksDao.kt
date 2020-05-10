@@ -41,6 +41,6 @@ interface BanksDao {
     suspend fun deleteBank(id: Int)
 
     @Query("DELETE FROM BANKS")
-    suspend fun deleteAllArticles()
+    suspend fun deleteAllBanks()
 
 }
