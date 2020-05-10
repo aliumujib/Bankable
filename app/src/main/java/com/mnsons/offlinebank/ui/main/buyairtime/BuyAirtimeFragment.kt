@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.transfermoney
+package com.mnsons.offlinebank.ui.main.buyairtime
 
 import android.content.Context
 import android.os.Bundle
@@ -8,18 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
+import com.mnsons.offlinebank.databinding.FragmentBuyAirtimeBinding
 import com.mnsons.offlinebank.utils.ext.onBackPressed
 
-class TransferMoneyFragment : Fragment() {
+class BuyAirtimeFragment : Fragment() {
 
-    private lateinit var _binding: FragmentTransferMoneyBinding
+    private lateinit var _binding: FragmentBuyAirtimeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTransferMoneyBinding.inflate(inflater, container, false)
+        _binding = FragmentBuyAirtimeBinding.inflate(inflater, container, false)
 
         return _binding.root
     }
@@ -30,35 +30,27 @@ class TransferMoneyFragment : Fragment() {
         _binding.root.setInAnimation(context, R.anim.nav_default_enter_anim)
         _binding.root.setOutAnimation(context, R.anim.nav_default_exit_anim)
 
-        _binding.transferDetailsContainer.btnNext.setOnClickListener {
-            _binding.root.displayedChild = VIEW_SELECT_BANK
-        }
-
-        _binding.selectBankContainer.btnNext.setOnClickListener {
+        _binding.airtimeDetailsContainer.btnNext.setOnClickListener {
             _binding.root.displayedChild = VIEW_ENTER_PIN
         }
 
-        _binding.selectBankContainer.btnCancel.setOnClickListener {
-            _binding.root.displayedChild = VIEW_ENTER_DETAILS
-        }
-
-        _binding.transferPinContainer.btnNext.setOnClickListener {
+        _binding.airtimePinContainer.btnNext.setOnClickListener {
             _binding.root.displayedChild = VIEW_SAVE_BENEFICIARY
         }
 
-        _binding.transferPinContainer.btnCancel.setOnClickListener {
+        _binding.airtimePinContainer.btnCancel.setOnClickListener {
             _binding.root.displayedChild = VIEW_ENTER_DETAILS
         }
 
-        _binding.saveTransferBeneficiaryContainer.btnCancel.setOnClickListener {
+        _binding.saveAirtimeBeneficiaryContainer.btnCancel.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        _binding.saveTransferBeneficiaryContainer.btnYes.setOnClickListener {
+        _binding.saveAirtimeBeneficiaryContainer.btnYes.setOnClickListener {
 
         }
 
-        _binding.saveTransferBeneficiaryContainer.btnNo.setOnClickListener {
+        _binding.saveAirtimeBeneficiaryContainer.btnNo.setOnClickListener {
 
         }
     }
@@ -67,8 +59,7 @@ class TransferMoneyFragment : Fragment() {
         super.onAttach(context)
 
         onBackPressed {
-            if (_binding.root.displayedChild == VIEW_ENTER_PIN
-                || _binding.root.displayedChild == VIEW_ENTER_PIN) {
+            if (_binding.root.displayedChild == VIEW_ENTER_PIN) {
                 _binding.root.displayedChild = VIEW_ENTER_DETAILS
                 return@onBackPressed
             }
@@ -78,9 +69,8 @@ class TransferMoneyFragment : Fragment() {
 
     companion object {
         const val VIEW_ENTER_DETAILS = 0
-        const val VIEW_SELECT_BANK = 1
-        const val VIEW_ENTER_PIN = 2
-        const val VIEW_SAVE_BENEFICIARY = 3
+        const val VIEW_ENTER_PIN = 1
+        const val VIEW_SAVE_BENEFICIARY = 2
     }
 
 }

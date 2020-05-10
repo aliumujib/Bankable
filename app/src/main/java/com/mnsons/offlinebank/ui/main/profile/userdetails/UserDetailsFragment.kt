@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.profile.userdetails
+package com.mnsons.offlinebank.ui.main.profile.userdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentUserDetailsBinding
-import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
 
 class UserDetailsFragment : Fragment() {

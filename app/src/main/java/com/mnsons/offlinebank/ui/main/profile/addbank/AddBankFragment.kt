@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.profile.addbank
+package com.mnsons.offlinebank.ui.main.profile.addbank
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.databinding.FragmentAddBankBinding
 import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
-import com.mnsons.offlinebank.ui.adapters.BankSelectionListener
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
 import kotlinx.android.synthetic.main.fragment_add_bank.*
 
 class AddBankFragment : Fragment(),

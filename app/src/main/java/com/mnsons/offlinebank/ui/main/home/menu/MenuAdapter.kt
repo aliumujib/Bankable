@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.home.menu
+package com.mnsons.offlinebank.ui.main.home.menu
 
 import android.text.Html
 import android.view.LayoutInflater

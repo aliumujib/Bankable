@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.mnsons.offlinebank.ui.home.HomeFragment"
+        android:name="com.mnsons.offlinebank.ui.main.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -28,13 +28,13 @@
 
     <fragment
         android:id="@+id/navigation_activity"
-        android:name="com.mnsons.offlinebank.ui.dashboard.DashboardFragment"
+        android:name="com.mnsons.offlinebank.ui.main.dashboard.DashboardFragment"
         android:label="@string/title_activity"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.mnsons.offlinebank.ui.profile.userdetails.UserDetailsFragment"
+        android:name="com.mnsons.offlinebank.ui.main.profile.userdetails.UserDetailsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_user_details">
         <action
@@ -48,19 +48,19 @@
 
     <fragment
         android:id="@+id/navigation_add_bank"
-        android:name="com.mnsons.offlinebank.ui.profile.addbank.AddBankFragment"
+        android:name="com.mnsons.offlinebank.ui.main.profile.addbank.AddBankFragment"
         android:label="Add a Bank"
         tools:layout="@layout/fragment_add_bank" />
 
     <fragment
         android:id="@+id/navigation_buy_airtime"
-        android:name="com.mnsons.offlinebank.ui.buyairtime.BuyAirtimeFragment"
+        android:name="com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeFragment"
         android:label="Buy Airtime"
         tools:layout="@layout/fragment_buy_airtime" />
 
     <fragment
         android:id="@+id/navigation_transfer_money"
-        android:name="com.mnsons.offlinebank.ui.transfermoney.TransferMoneyFragment"
+        android:name="com.mnsons.offlinebank.ui.main.transfermoney.TransferMoneyFragment"
         android:label="Transfer Money"
         tools:layout="@layout/fragment_transfer_money" />
 

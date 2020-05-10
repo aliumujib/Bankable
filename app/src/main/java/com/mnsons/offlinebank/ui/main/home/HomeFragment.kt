@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.home
+package com.mnsons.offlinebank.ui.main.home
 
 import android.os.Bundle
 import android.util.Log
@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
-import com.mnsons.offlinebank.ui.home.menu.MenuAction
-import com.mnsons.offlinebank.ui.home.menu.MenuActionClickListener
-import com.mnsons.offlinebank.ui.home.menu.MenuAdapter
+import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
+import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
+import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import io.cabriole.decorator.GridSpanMarginDecoration
 
