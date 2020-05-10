@@ -3,10 +3,10 @@ package com.mnsons.offlinebank.contracts
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.base.BaseStringOnlyInputContract
 import java.security.InvalidParameterException
 
 
@@ -28,8 +28,13 @@ class CheckGTBankBalanceContract : ActivityResultContract<String,String>() {
 
         val sessionTextArr: Array<String> =
             intent.getStringArrayExtra("session_messages") ?: emptyArray()
+        sessionTextArr.forEach {
+            Log.d(CheckGTBankBalanceContract::class.java.simpleName, it)
+        }
+        Log.d(CheckGTBankBalanceContract::class.java.simpleName, intent.toString())
+
         return if (sessionTextArr.isNotEmpty()) {
-            sessionTextArr[0]
+            sessionTextArr.last()
         } else {
             context.getString(R.string.error_fetching_gtbank_acc_balance)
         }
