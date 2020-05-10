@@ -13,20 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.data.cache.room.entities
+package com.mnsons.offlinebank.di.main.home
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.mnsons.offlinebank.model.BankModel
 
-@Entity(tableName = "BANKS")
-data class BankCacheModel(
-    @PrimaryKey
-    var id: Int,
-    var name: Int,
-    var lastKnownBalance: Long,
-    var sortCode: String,
-    var imageURL: Int
-) {
+import com.mnsons.offlinebank.di.main.MainComponent
+import com.mnsons.offlinebank.di.scopes.ActivityScope
+import com.mnsons.offlinebank.di.scopes.FragmentScope
+import com.mnsons.offlinebank.ui.main.home.HomeFragment
+import dagger.Component
+
+/**
+ * Class for which a fully-formed, dependency-injected implementation is to
+ * be generated from [HomeModule].
+ *
+ * @see Component
+ */
+@FragmentScope
+@Component(
+    modules = [HomeModule::class],
+    dependencies = [MainComponent::class])
+interface HomeComponent {
+
+    fun inject(homeFragment: HomeFragment)
 
 }

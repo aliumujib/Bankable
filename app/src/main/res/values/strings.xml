@@ -12,7 +12,7 @@
     <string name="last_name">Last name</string>
     <string name="phone_number">Phone number</string>
     <string name="next">Next</string>
-    <string name="home_hello_intro">Hello Peter 😊,\nWhat do you want to do?</string>
+    <string name="home_hello_intro">Hello %1$s 😊,\nWhat do you want to do?</string>
     <string name="transfer_funds">Transfer Money</string>
     <string name="buy_airtime">Buy Airtime</string>
     <string name="buy_internet">Buy Data</string>
@@ -33,4 +33,8 @@
     <string name="no">No</string>
     <string name="amount_to_transfer">Amount to transfer</string>
     <string name="account_number">Account number</string>
+    <string name="gtbank">GTBank</string>
+    <string name="accessbank">Access Bank</string>
+    <string name="zenith_bank">Zenith Bank</string>
+    <string name="uba">United Bank Of Africa</string>
 </resources>

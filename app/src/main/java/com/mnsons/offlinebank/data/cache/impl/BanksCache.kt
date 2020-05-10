@@ -15,7 +15,7 @@ class BanksCache @Inject constructor(val banksDao: BanksDao) {
         banksDao.insert(bank)
     }
 
-    suspend fun getBanks(): Flow<List<BankCacheModel>> {
+    fun getBanks(): Flow<List<BankCacheModel>> {
         return banksDao.getAllBanks()
     }
 

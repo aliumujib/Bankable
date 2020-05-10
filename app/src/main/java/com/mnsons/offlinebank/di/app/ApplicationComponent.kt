@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.data.cache.room.entities
+package com.mnsons.offlinebank.di.app
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.ApplicationClass
+import com.mnsons.offlinebank.di.components.CoreComponent
+import com.mnsons.offlinebank.di.scopes.AppScope
+import dagger.Component
 
-@Entity(tableName = "BANKS")
-data class BankCacheModel(
-    @PrimaryKey
-    var id: Int,
-    var name: Int,
-    var lastKnownBalance: Long,
-    var sortCode: String,
-    var imageURL: Int
-) {
+@AppScope
+@Component(
+    dependencies = [CoreComponent::class],
+    modules = [AppModule::class]
+)
+interface ApplicationComponent {
+
+
+    /**
+     * Inject dependencies on application.
+     *
+     * @param application The sample application.
+     */
+    fun inject(application: ApplicationClass)
 
 }

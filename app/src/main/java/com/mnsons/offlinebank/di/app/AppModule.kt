@@ -13,20 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.data.cache.room.entities
+package com.mnsons.offlinebank.di.app
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.mnsons.offlinebank.model.BankModel
+import android.content.Context
+import com.mnsons.offlinebank.ApplicationClass
+import dagger.Module
+import dagger.Provides
 
-@Entity(tableName = "BANKS")
-data class BankCacheModel(
-    @PrimaryKey
-    var id: Int,
-    var name: Int,
-    var lastKnownBalance: Long,
-    var sortCode: String,
-    var imageURL: Int
-) {
+/**
+ * Class that contributes to the object graph [ApplicationComponent].
+ *
+ * @see Module
+ */
+@Module
+class AppModule {
 
+    /**
+     * Create a provider method binding for [Context].
+     *
+     * @param application Sample Application.
+     * @return Instance of context.
+     * @see Provides
+     */
+    @Provides
+    fun provideContext(application: ApplicationClass): Context = application.applicationContext
 }
