@@ -33,4 +33,5 @@
     <string name="no">No</string>
     <string name="amount_to_transfer">Amount to transfer</string>
     <string name="account_number">Account number</string>
+    <string name="select_a_bank">Select a bank</string>
 </resources>

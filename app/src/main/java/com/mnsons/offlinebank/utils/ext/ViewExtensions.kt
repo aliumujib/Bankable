@@ -22,6 +22,7 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.graphics.Color
 import android.os.Build
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,4 +114,23 @@ fun Activity.animateStatusBarColorChangeTo(@ColorRes endColor: Int) {
             window.statusBarColor = it
         }
     }
+}
+
+fun checkIfIsMarshMallow(): Boolean {
+    // Check if we're running on Android 6.0 or higher
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+}
+
+fun delayForASecond(function: () -> Unit) {
+    val handler = Handler()
+    handler.postDelayed({
+        function.invoke()
+    }, 1000)
+}
+
+fun delayFor2Seconds(function: () -> Unit) {
+    val handler = Handler()
+    handler.postDelayed({
+        function.invoke()
+    }, 2000)
 }
