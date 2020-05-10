@@ -5,7 +5,9 @@ import androidx.annotation.StringRes
 import com.mnsons.offlinebank.R
 
 sealed class MenuAction(
-    val id: Int, @StringRes val titleRes: Int, @DrawableRes val iconRes: Int,
+    val id: Int,
+    @StringRes val titleRes: Int,
+    @DrawableRes val iconRes: Int,
     val isEnabled: Boolean = false
 ) {
     object TransferFunds : MenuAction(1, R.string.transfer_funds, R.drawable.transfer, true)

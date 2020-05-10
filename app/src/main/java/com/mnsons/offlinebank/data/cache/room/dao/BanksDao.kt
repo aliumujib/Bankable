@@ -15,7 +15,10 @@
  */
 package com.mnsons.offlinebank.data.cache.room.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
 import kotlinx.coroutines.flow.Flow
 

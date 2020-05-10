@@ -26,4 +26,11 @@
     <string name="add_a_bank">Add a Bank</string>
     <string name="your_banks">Your Banks</string>
     <string name="add_to_my_banks">Add to my banks</string>
+    <string name="amount_to_buy">Amount to buy</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="amount_to_transfer">Amount to transfer</string>
+    <string name="account_number">Account number</string>
 </resources>

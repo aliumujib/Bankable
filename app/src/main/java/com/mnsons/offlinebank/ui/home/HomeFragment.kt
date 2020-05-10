@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.ui.home.menu.MenuAction
@@ -38,8 +40,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -49,7 +50,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val modelList = listOf<MenuAction>(
+        val modelList = listOf(
             MenuAction.TransferFunds,
             MenuAction.BuyAirtime,
             MenuAction.BuyData,
@@ -84,8 +85,16 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     }
 
     override fun onMenuActionClick(model: MenuAction) {
-        if (model.id == 5) {
-            gtBankBalanceCall.launch("19142a42")
+        when (model) {
+            MenuAction.BuyAirtime -> {
+                findNavController().navigate(R.id.action_navigation_home_to_navigation_buy_airtime)
+            }
+            MenuAction.TransferFunds -> {
+                findNavController().navigate(R.id.action_navigation_home_to_navigation_transfer_money)
+            }
+            MenuAction.CheckAccountBalance -> {
+                gtBankBalanceCall.launch("19142a42")
+            }
         }
     }
 

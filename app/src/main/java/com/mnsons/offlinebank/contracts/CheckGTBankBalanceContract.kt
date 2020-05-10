@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.base.BaseStringOnlyInputContract
 import java.security.InvalidParameterException
 
 
