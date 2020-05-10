@@ -1,7 +1,8 @@
-package com.mnsons.offlinebank
+package com.mnsons.offlinebank.ui.onboarding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mnsons.offlinebank.R
 
 class OnBoardingActivity : AppCompatActivity() {
 

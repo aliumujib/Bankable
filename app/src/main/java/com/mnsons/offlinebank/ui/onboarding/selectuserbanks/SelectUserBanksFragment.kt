@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import com.mnsons.offlinebank.MainActivity
+import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.databinding.FragmentSelectUserBanksBinding
 import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.ui.adapters.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.utils.DummyData
-import com.mnsons.offlinebank.ui.adapters.BankSelectionListener
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
 import kotlinx.android.synthetic.main.fragment_select_user_banks.*
 
 class SelectUserBanksFragment : Fragment(),

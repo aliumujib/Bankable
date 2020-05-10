@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank
+package com.mnsons.offlinebank.ui.main
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.Hover.DownloadListener
+import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.ActivityMainBinding
 import com.mnsons.offlinebank.utils.ext.*
 import java.util.*
@@ -21,7 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val topLevelDestinationIds = setOf(
-        R.id.navigation_home, R.id.navigation_activity, R.id.navigation_profile
+        R.id.navigation_home,
+        R.id.navigation_activity,
+        R.id.navigation_profile
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,9 +58,9 @@ class MainActivity : AppCompatActivity() {
             if (topLevelDestinationIds.contains(destination.id).not()) {
                 hideBottomTabs()
                 animateStatusBarColorChangeTo(R.color.white)
-                binding.toolbar.show()
+                binding.toolbar.slideUp()
             } else {
-                binding.toolbar.hide()
+                binding.toolbar.slideDown()
                 animateStatusBarColorChangeTo(R.color.cardBorderGrey)
                 showBottomTabs()
             }

@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.dashboard
+package com.mnsons.offlinebank.ui.main.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

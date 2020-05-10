@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.home.menu
+package com.mnsons.offlinebank.ui.main.home.menu
 
 
 interface MenuActionClickListener {

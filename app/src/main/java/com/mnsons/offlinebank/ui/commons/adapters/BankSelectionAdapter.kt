@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.adapters
+package com.mnsons.offlinebank.ui.commons.adapters
 
 import android.view.LayoutInflater
 import android.view.View
