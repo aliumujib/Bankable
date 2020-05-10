@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.profile.addbank
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,26 +8,39 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.databinding.FragmentAddBankBinding
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
-import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
+import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
+import com.mnsons.offlinebank.ui.main.MainActivity
+import com.mnsons.offlinebank.ui.main.presentation.MainState
+import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
+import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import kotlinx.android.synthetic.main.fragment_add_bank.*
+import javax.inject.Inject
 
 class AddBankFragment : Fragment(),
     BankSelectionListener<BankModel> {
 
     private lateinit var _binding: FragmentAddBankBinding
 
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(
             BankSelectionAdapter.ViewType.SELECTABLE,
             this
         ).apply {
-            all = DummyData.banks
-            selected = DummyData.banks.subList(0, 1)
+            all = BanksPopulator.fetchSupportedBanks()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        injectDependencies()
     }
 
     override fun onCreateView(
@@ -34,7 +48,6 @@ class AddBankFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddBankBinding.inflate(inflater, container, false)
-
         return _binding.root
     }
 
@@ -54,17 +67,41 @@ class AddBankFragment : Fragment(),
         }
 
         _binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String): Boolean {
+                bankSelectionAdapter.filter(newText)
                 return false
             }
         })
 
         _binding.btnAddToMyBanks.setOnClickListener {
-            findNavController().navigateUp()
+            mainViewModel.updateUserBanks(bankSelectionAdapter.selected)
+        }
+
+        nonNullObserve(mainViewModel.state, ::handleStates)
+    }
+
+    private fun handleStates(mainState: MainState) {
+        when (mainState) {
+            is MainState.Idle -> {
+                mainState.user?.let {
+                    bankSelectionAdapter.selected.addAll(it.banks)
+                    _binding.rvBanks.adapter = bankSelectionAdapter
+                }
+            }
+            is MainState.Editing -> {
+                findNavController().navigateUp()
+            }
+            is MainState.Error -> {
+                Snackbar.make(
+                    _binding.root,
+                    mainState.error?.message.toString(),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -74,6 +111,10 @@ class AddBankFragment : Fragment(),
 
     override fun deselect(item: BankModel) {
         bankSelectionAdapter.removeFromSelected(item)
+    }
+
+    private fun injectDependencies() {
+        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
 }

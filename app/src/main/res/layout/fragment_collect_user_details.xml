@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.onboarding.collectuserdetails.CollectUserDetailsFragment">
 
-
     <ImageView
         android:id="@+id/ivBankLogo"
         android:layout_width="wrap_content"
@@ -16,6 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
@@ -91,6 +91,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/phone_number"
             android:maxLines="1"
+            android:inputType="phone"
             android:imeOptions="actionDone"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -113,7 +114,5 @@
             android:layout_margin="16dp"
             android:singleLine="true"
             android:text="@string/next" />
-
     </com.google.android.material.card.MaterialCardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

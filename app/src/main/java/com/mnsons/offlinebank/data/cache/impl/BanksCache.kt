@@ -5,7 +5,7 @@ import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class BanksCache @Inject constructor(val banksDao: BanksDao) {
+class BanksCache @Inject constructor(private val banksDao: BanksDao) {
 
     suspend fun saveBanks(list: List<BankCacheModel>) {
         banksDao.insert(list)
@@ -23,5 +23,8 @@ class BanksCache @Inject constructor(val banksDao: BanksDao) {
         return banksDao.getAllBanksCount() > 0
     }
 
+    suspend fun clearBanks() {
+        return banksDao.deleteAllBanks()
+    }
 
 }
