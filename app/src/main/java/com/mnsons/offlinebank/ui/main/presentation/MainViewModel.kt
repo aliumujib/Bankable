@@ -41,32 +41,5 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun updateUserBanks(banks: List<BankModel>) {
-        if (banks.isEmpty()) {
-            _state.value = MainState.Error(Throwable("Please select at least one bank"))
-        } else {
-            if (settingsCache.userDataExists()) {
-                _state.value = MainState.Editing(
-                    User(
-                        settingsCache.fetchUserFirstName()!!,
-                        settingsCache.fetchUserLastName()!!,
-                        settingsCache.fetchUserPhone()!!,
-                        banks
-                    )
-                )
-
-                viewModelScope.launch {
-                    banksCache.clearBanks()
-                    banksCache.saveBanks(
-                        banks.mapInto {
-                            it.toBankCacheModel()
-                        }
-                    )
-                }
-            } else {
-                _state.value = MainState.LoggedOut
-            }
-        }
-    }
 
 }

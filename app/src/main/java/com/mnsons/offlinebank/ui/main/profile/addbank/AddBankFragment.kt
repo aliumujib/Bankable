@@ -29,6 +29,9 @@ class AddBankFragment : Fragment(),
     @Inject
     lateinit var mainViewModel: MainViewModel
 
+    @Inject
+    lateinit var addBankViewModel: AddBankViewModel
+
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(
             BankSelectionAdapter.ViewType.SELECTABLE,
@@ -78,27 +81,27 @@ class AddBankFragment : Fragment(),
         })
 
         _binding.btnAddToMyBanks.setOnClickListener {
-            mainViewModel.updateUserBanks(bankSelectionAdapter.selected)
+            addBankViewModel.updateUserBanks(bankSelectionAdapter.selected)
         }
 
-        nonNullObserve(mainViewModel.state, ::handleStates)
+        nonNullObserve(addBankViewModel.state, ::handleStates)
     }
 
-    private fun handleStates(mainState: MainState) {
-        when (mainState) {
-            is MainState.Idle -> {
-                mainState.user?.let {
+    private fun handleStates(addBankState: AddBankState) {
+        when (addBankState) {
+            is AddBankState.Idle -> {
+                addBankState.user?.let {
                     bankSelectionAdapter.selected.addAll(it.banks)
                     _binding.rvBanks.adapter = bankSelectionAdapter
                 }
             }
-            is MainState.Editing -> {
+            is AddBankState.Editing -> {
                 findNavController().navigateUp()
             }
-            is MainState.Error -> {
+            is AddBankState.Error -> {
                 Snackbar.make(
                     _binding.root,
-                    mainState.error?.message.toString(),
+                    addBankState.error?.message.toString(),
                     Snackbar.LENGTH_SHORT
                 ).show()
             }

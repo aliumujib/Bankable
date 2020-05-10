@@ -18,6 +18,7 @@ package com.mnsons.offlinebank.di.main.addbanks
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
+import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.di.scopes.ActivityScope
 import com.mnsons.offlinebank.di.scopes.FragmentScope
 import com.mnsons.offlinebank.ui.main.home.HomeViewModel
@@ -41,9 +42,11 @@ class AddBanksModule(
     @FragmentScope
     @Provides
     fun providesAddBankViewModel(
+        settingsCache: SettingsCache,
         banksCache: BanksCache
     ) = fragment.viewModel {
         AddBankViewModel(
+            settingsCache,
             banksCache
         )
     }
