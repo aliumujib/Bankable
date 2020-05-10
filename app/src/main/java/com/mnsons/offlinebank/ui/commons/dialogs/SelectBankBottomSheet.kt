@@ -11,7 +11,7 @@ import com.mnsons.offlinebank.utils.ext.delayForASecond
 import kotlinx.android.synthetic.main.layout_select_bank_bottom_sheet.*
 
 class SelectBankBottomSheet(
-    private val banks: MutableList<BankModel>,
+    private val banks: List<BankModel>,
     private val selectBankListener: (BankModel) -> Unit
 ) : BaseRoundedBottomSheetDialogFragment(), BankSelectionListener<BankModel> {
 
