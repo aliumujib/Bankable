@@ -19,6 +19,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.mnsons.offlinebank.utils.livedata.NonNullObserver
 
 /**
  * Adds the given observer to the observers list within the lifespan of the given
@@ -33,6 +34,10 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
     liveData.observe(this, Observer {
         it?.let { t -> observer(t) }
     })
+}
+
+fun <T : Any, L : LiveData<T>> LifecycleOwner.nonNullObserve(liveData: L, body: (T) -> Unit) {
+    liveData.observe(this, NonNullObserver(body))
 }
 
 /**

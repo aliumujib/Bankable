@@ -23,9 +23,3 @@ import androidx.lifecycle.Transformations
 fun <T, R> LiveData<T>.map(transformation: (T) -> R): LiveData<R> {
     return Transformations.map(this, transformation)
 }
-
-
-
-fun <T : Any, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) {
-    liveData.observe(this, Observer(body))
-}

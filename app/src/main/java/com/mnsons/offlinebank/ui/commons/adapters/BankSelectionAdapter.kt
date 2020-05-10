@@ -14,7 +14,8 @@ class BankSelectionAdapter(
     private val bankSelectionListener: BankSelectionListener<BankModel>? = null
 ) : RecyclerView.Adapter<BankSelectionAdapter.BankItemViewHolder>() {
 
-    var all: MutableList<BankModel> = mutableListOf()
+    var all: List<BankModel> = mutableListOf()
+    var backUp: List<BankModel> = mutableListOf()
     var selected: MutableList<BankModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BankItemViewHolder {
@@ -47,10 +48,15 @@ class BankSelectionAdapter(
         notifyDataSetChanged()
     }
 
+    fun filter(newText: String) {
+
+    }
+
     inner class BankItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(bank: BankModel, isSelected: Boolean) {
-            itemView.tvBankName.text = bank.bankName
+            itemView.tvBankName.setText(bank.bankName)
+            itemView.ivBankLogo.setImageResource(bank.bankLogo)
 
             if (viewType == ViewType.SELECTABLE) {
                 itemView.ivCheckMark.isSelected = isSelected

@@ -77,18 +77,32 @@
         tools:listitem="@layout/item_bank"
         tools:itemCount="4"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        app:layout_constraintBottom_toTopOf="@+id/btnNextParent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchContainer" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/half_space"
+        app:cardElevation="8dp"
+        android:id="@+id/btnNextParent"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNext"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:text="@string/next"
         android:layout_margin="16dp"
         style="@style/ActionButtonTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

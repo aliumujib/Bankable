@@ -9,7 +9,6 @@
     android:layout_marginTop="8dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
-    app:strokeColor="@color/cardBorderGrey"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_dummy_bank_logo" />
+            app:srcCompat="@drawable/ic_access" />
 
         <TextView
             android:id="@+id/tvBankName"

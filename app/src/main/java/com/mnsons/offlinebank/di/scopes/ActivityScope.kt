@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.data.cache.room.entities
+package com.mnsons.offlinebank.di.scopes
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.mnsons.offlinebank.model.BankModel
+import javax.inject.Scope
 
-@Entity(tableName = "BANKS")
-data class BankCacheModel(
-    @PrimaryKey
-    var id: Int,
-    var name: Int,
-    var lastKnownBalance: Long,
-    var sortCode: String,
-    var imageURL: Int
-) {
-
-}
+/**
+ * Scope for a feature module.
+ */
+@Scope
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class ActivityScope

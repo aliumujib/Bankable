@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,23 +8,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
+import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
+import com.mnsons.offlinebank.di.main.home.HomeModule
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectBankBottomSheet
+import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
+import com.mnsons.offlinebank.ui.main.presentation.MainState
+import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.utils.ext.dpToPx
+import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import io.cabriole.decorator.GridSpanMarginDecoration
+import javax.inject.Inject
 
 class HomeFragment : Fragment(), MenuActionClickListener {
 
-    private lateinit var homeViewModel: HomeViewModel
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var homeViewModel: HomeViewModel
 
     private val gtBankBalanceCall =
         registerForActivityResult(CheckGTBankBalanceContract()) { result ->
@@ -34,18 +46,28 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     private lateinit var _binding: FragmentHomeBinding
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        injectDependencies()
+    }
+
+    private fun injectDependencies() {
+        DaggerHomeComponent.builder()
+            .mainComponent(mainComponent(requireActivity()))
+            .homeModule(HomeModule(this))
+            .build()
+            .inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return _binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,6 +104,18 @@ class HomeFragment : Fragment(), MenuActionClickListener {
         }
 
         menuAdapter.submitList(modelList)
+
+        nonNullObserve(mainViewModel.state, ::handleStates)
+
+    }
+
+
+    private fun handleStates(mainState: MainState) {
+        if (mainState is MainState.Idle) {
+            mainState.user?.let {
+                _binding.nameIntro.setText(requireContext().getString(R.string.home_hello_intro, it.firstName))
+            }
+        }
     }
 
     override fun onMenuActionClick(model: MenuAction) {
