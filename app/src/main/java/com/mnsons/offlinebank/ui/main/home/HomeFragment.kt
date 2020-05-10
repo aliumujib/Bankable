@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
+import com.mnsons.offlinebank.ui.commons.dialogs.SelectBankBottomSheet
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
+import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import io.cabriole.decorator.GridSpanMarginDecoration
-
 
 class HomeFragment : Fragment(), MenuActionClickListener {
 
@@ -85,17 +85,27 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     }
 
     override fun onMenuActionClick(model: MenuAction) {
-        when (model) {
-            MenuAction.BuyAirtime -> {
-                findNavController().navigate(R.id.action_navigation_home_to_navigation_buy_airtime)
+        SelectBankBottomSheet(DummyData.banks) { bank ->
+            when (model) {
+                MenuAction.BuyAirtime -> {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionNavigationHomeToNavigationBuyAirtime(
+                            bank
+                        )
+                    )
+                }
+                MenuAction.TransferFunds -> {
+                    findNavController().navigate(
+                        HomeFragmentDirections.actionNavigationHomeToNavigationTransferMoney(
+                            bank
+                        )
+                    )
+                }
+                MenuAction.CheckAccountBalance -> {
+                    gtBankBalanceCall.launch("19142a42")
+                }
             }
-            MenuAction.TransferFunds -> {
-                findNavController().navigate(R.id.action_navigation_home_to_navigation_transfer_money)
-            }
-            MenuAction.CheckAccountBalance -> {
-                gtBankBalanceCall.launch("19142a42")
-            }
-        }
+        }.show(childFragmentManager, javaClass.simpleName)
     }
 
 }

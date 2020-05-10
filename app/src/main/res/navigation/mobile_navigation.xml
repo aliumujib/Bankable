@@ -56,12 +56,20 @@
         android:id="@+id/navigation_buy_airtime"
         android:name="com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeFragment"
         android:label="Buy Airtime"
-        tools:layout="@layout/fragment_buy_airtime" />
+        tools:layout="@layout/fragment_buy_airtime" >
+        <argument
+            android:name="bank"
+            app:argType="com.mnsons.offlinebank.model.BankModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_transfer_money"
         android:name="com.mnsons.offlinebank.ui.main.transfermoney.TransferMoneyFragment"
         android:label="Transfer Money"
-        tools:layout="@layout/fragment_transfer_money" />
+        tools:layout="@layout/fragment_transfer_money" >
+        <argument
+            android:name="bank"
+            app:argType="com.mnsons.offlinebank.model.BankModel" />
+    </fragment>
 
 </navigation>
