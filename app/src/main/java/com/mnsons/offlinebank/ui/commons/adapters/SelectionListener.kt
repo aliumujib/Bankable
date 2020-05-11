@@ -1,6 +1,6 @@
 package com.mnsons.offlinebank.ui.commons.adapters
 
-interface BankSelectionListener<T> {
+interface SelectionListener<T> {
 
     fun select(item: T)
 

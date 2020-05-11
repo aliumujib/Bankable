@@ -15,25 +15,26 @@
  */
 package com.mnsons.offlinebank.data.cache.room
 
-
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
-import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
-import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
-import com.mnsons.offlinebank.data.cache.room.entities.BankMenuCacheModel
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.mnsons.offlinebank.model.BankMenuModel
 
 
-@Database(
-    entities = [BankCacheModel::class, BankMenuCacheModel::class],
-    version = 1, exportSchema = false
-)
-@TypeConverters(Converters::class)
-abstract class DBClass : RoomDatabase() {
+class Converters {
 
-    abstract fun banksDao(): BanksDao
+    @TypeConverter
+    fun fromBankMenuModelString(value: String?): List<BankMenuModel>? {
+        val listType = object : TypeToken<List<BankMenuModel>?>() {
+        }.type
+        return Gson().fromJson(value, listType)
+    }
 
-    abstract fun bankMenuDao(): BankMenuDao
+    @TypeConverter
+    fun fromBankMenuModelList(data: List<BankMenuModel>?): String {
+        val gson = Gson()
+        return gson.toJson(data)
+    }
+
 
 }

@@ -3,8 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_activity">Activity</string>
     <string name="title_profile">Profile</string>
-    <string name="error_fetching_gtbank_acc_balance">There was an error fetching your GTBank account balance</string>
-    <string name="fetch_gtbank_balance">Fetch GTBank Balance</string>
+    <string name="error_fetching_">There was an error fetching details</string>
+    <string name="error_fetching_bank_acc_balance">There was an error fetching your bank account balance</string>
+    <string name="error_index_">There was an error</string>
+
+    <string name="fetch_gtbank_balance">Fetch Bank Balance</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="greeting_text">Hello 👋🏾,\n\nLet’s know who you are.</string>
     <string name="first_name">First name</string>
@@ -30,6 +34,7 @@
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="recipient_bank">Recipient Bank</string>
     <string name="amount_to_transfer">Amount to transfer</string>
     <string name="account_number">Account number</string>
     <string name="gtbank">GTBank</string>
@@ -41,4 +46,8 @@
     <string name="transaction_success_message">Your transaction has been \ncompleted successfully</string>
     <string name="failed_transaction_message">Your transaction failed.\nPlease try again later.</string>
     <string name="your_account_balance_s_are">Your account balance(s) are:</string>
+    <string name="transaction_successful">Transaction Successful</string>
+    <string name="transaction_n0t_successful">Transaction not Successful</string>
+    <string name="success">Your transaction has been completed successfully</string>
+
 </resources>

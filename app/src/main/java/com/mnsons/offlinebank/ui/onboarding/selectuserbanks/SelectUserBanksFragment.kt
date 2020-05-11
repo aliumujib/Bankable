@@ -16,7 +16,7 @@ import com.mnsons.offlinebank.di.onboarding.DaggerOnBoardingComponent
 import com.mnsons.offlinebank.di.onboarding.OnBoardingModule
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
+import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
 import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingState
@@ -26,12 +26,24 @@ import kotlinx.android.synthetic.main.fragment_select_user_banks.*
 import javax.inject.Inject
 
 class SelectUserBanksFragment : Fragment(),
-    BankSelectionListener<BankModel> {
+    SelectionListener<BankModel> {
 
     private lateinit var _binding: FragmentSelectUserBanksBinding
 
     @Inject
     lateinit var onBoardingViewModel: OnBoardingViewModel
+
+
+    private var bankTransferMenuIndexer: BankTransferMenuIndexer = BankTransferMenuIndexer(
+        { id, results ->
+            onBoardingViewModel.saveMenuForBank(id, results)
+        }, {
+            onBoardingViewModel.finishSetup()
+            startActivity(Intent(context, MainActivity::class.java))
+            activity?.finish()
+        },
+        this
+    )
 
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(
@@ -41,6 +53,7 @@ class SelectUserBanksFragment : Fragment(),
             all = BanksPopulator.fetchSupportedBanks()
         }
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -107,9 +120,7 @@ class SelectUserBanksFragment : Fragment(),
 
             }
             is OnBoardingState.Finished -> {
-                onBoardingViewModel.finishSetup()
-                startActivity(Intent(context, MainActivity::class.java))
-                activity?.finish()
+                bankTransferMenuIndexer.indexMenuForBanks(bankSelectionAdapter.selected)
             }
             is OnBoardingState.Editing -> {
                 _binding.tvFirstName.text = "${onBoardingState.user?.firstName},"

@@ -12,11 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
+import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
-import com.mnsons.offlinebank.ui.commons.dialogs.SelectBankBottomSheet
+import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.ui.commons.dialogs.SelectBottomSheet
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
@@ -37,7 +38,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     lateinit var homeViewModel: HomeViewModel
 
     private val gtBankBalanceCall =
-        registerForActivityResult(CheckGTBankBalanceContract()) { result ->
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
             Toast.makeText(context, result, Toast.LENGTH_LONG).show()
             Log.i("MyActivity", "Obtained result: $result")
         }
@@ -119,27 +120,31 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     override fun onMenuActionClick(model: MenuAction) {
         mainViewModel.state.value?.user?.banks?.let {
-            SelectBankBottomSheet(it) { bank ->
-                when (model) {
-                    MenuAction.BuyAirtime -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionNavigationHomeToNavigationBuyAirtime(
-                                bank
-                            )
-                        )
-                    }
-                    MenuAction.TransferFunds -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionNavigationHomeToNavigationTransferMoney(
-                                bank
-                            )
-                        )
-                    }
-                    MenuAction.CheckAccountBalance -> {
-                        gtBankBalanceCall.launch("19142a42")
-                    }
-                }
+            SelectBottomSheet(it) { bank ->
+                navigate(model, bank)
             }.show(childFragmentManager, javaClass.simpleName)
+        }
+    }
+
+    private fun navigate(model: MenuAction, bank: BankModel) {
+        when (model) {
+            MenuAction.BuyAirtime -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToNavigationBuyAirtime(
+                        bank
+                    )
+                )
+            }
+            MenuAction.TransferFunds -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToNavigationTransferMoney(
+                        bank
+                    )
+                )
+            }
+            MenuAction.CheckAccountBalance -> {
+                //gtBankMenuCall.launch(Unit)
+            }
         }
     }
 
