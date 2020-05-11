@@ -18,6 +18,7 @@ class FetchAccessBankOtherBanksContract :
         this.context = context
         return HoverParameters.Builder(context)
             .request("51dfe430")
+            .style(R.style.Theme_Hover)
             .buildIntent()
     }
 
