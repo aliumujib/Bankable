@@ -9,6 +9,15 @@
         <item name="android:textColor">@color/greyTextColor</item>
     </style>
 
+    <style name="Theme.Hover" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="fontFamily">@font/maisonneue_book</item>
+    </style>
+
+
     <style name="MenuItemCardTitle">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>

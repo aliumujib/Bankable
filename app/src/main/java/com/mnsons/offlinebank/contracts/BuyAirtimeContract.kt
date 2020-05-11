@@ -23,6 +23,7 @@ class BuyAirtimeContract : ActivityResultContract<BuyAirtimeModel, USSDResult<Un
                 .request(it.actionId)
                 .extra(Constants.EXTRA_AMOUNT, it.amount)
                 .extra(Constants.EXTRA_PHONE_NUMBER, it.phoneNumber)
+                .style(R.style.Theme_Hover)
                 .buildIntent()
         } ?: throw InvalidParameterException("Please enter the correct parameters")
     }

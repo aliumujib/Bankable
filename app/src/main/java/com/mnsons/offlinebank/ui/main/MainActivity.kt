@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.Hover.DownloadListener
+import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.ApplicationClass.Companion.coreComponent
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.ActivityMainBinding
@@ -26,6 +27,7 @@ import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
 import com.mnsons.offlinebank.utils.ext.*
 import java.util.*
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Hover.initialize(this)
+
         Hover.updateActionConfigs(object : DownloadListener {
             override fun onSuccess(p0: ArrayList<HoverAction>?) {
                 Toast.makeText(this@MainActivity, p0.toString(), Toast.LENGTH_LONG).show()
