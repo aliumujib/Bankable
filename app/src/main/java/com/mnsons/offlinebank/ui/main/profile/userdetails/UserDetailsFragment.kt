@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentUserDetailsBinding
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel

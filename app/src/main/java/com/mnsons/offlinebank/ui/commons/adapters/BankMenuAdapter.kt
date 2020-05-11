@@ -3,11 +3,9 @@ package com.mnsons.offlinebank.ui.commons.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.BankMenuModel
-import com.mnsons.offlinebank.model.BankModel
 import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankMenuAdapter(
@@ -30,7 +28,6 @@ class BankMenuAdapter(
         holderMenu.bind(all[position])
     }
 
-
     inner class BankMenuItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(bank: BankMenuModel) {
@@ -42,8 +39,4 @@ class BankMenuAdapter(
         }
     }
 
-    enum class ViewType {
-        NORMAL,
-        SELECTABLE
-    }
 }

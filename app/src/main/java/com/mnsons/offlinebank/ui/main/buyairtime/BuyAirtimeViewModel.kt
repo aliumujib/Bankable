@@ -3,8 +3,8 @@ package com.mnsons.offlinebank.ui.main.buyairtime
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.model.BuyAirtimeModel
+import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.model.buyairtime.BuyAirtimeModel
 import javax.inject.Inject
 
 class BuyAirtimeViewModel @Inject constructor() : ViewModel() {

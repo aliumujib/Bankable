@@ -4,28 +4,54 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.databinding.FragmentDashboardBinding
+import com.mnsons.offlinebank.ui.commons.adapters.transaction.SectionedTransactionsAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.transaction.TransactionsAdapter
+import com.mnsons.offlinebank.utils.TransactionUtil
 
 class DashboardFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+//    @Inject
+//    lateinit var dashboardViewModel: DashboardViewModel
+
+    private val transactionsAdapter by lazy { TransactionsAdapter() }
+
+    private val sectionedTransactionsAdapter by lazy {
+        SectionedTransactionsAdapter(transactionsAdapter)
+    }
+
+    private lateinit var _binding: FragmentDashboardBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        return _binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding.rvSectionedTransactions.adapter = sectionedTransactionsAdapter
+
+        sectionedTransactionsAdapter.setTransactions(
+            TransactionUtil.generateDummySectionedTransactions(
+                TransactionUtil.dummyTransactions
+            )
+        )
+
+    }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        injectDependencies()
+//    }
+//
+//    private fun injectDependencies() {
+//        (requireActivity() as MainActivity).mainComponent.inject(this)
+//    }
+
 }

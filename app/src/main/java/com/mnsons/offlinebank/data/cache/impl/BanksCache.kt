@@ -7,7 +7,6 @@ import com.mnsons.offlinebank.data.cache.room.entities.BankMenuCacheModel
 import com.mnsons.offlinebank.model.BankMenuModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class BanksCache @Inject constructor(

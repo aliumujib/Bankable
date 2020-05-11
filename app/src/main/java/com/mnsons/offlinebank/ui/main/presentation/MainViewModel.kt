@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.model.*
+import com.mnsons.offlinebank.model.user.UserModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
             banksCache.getBanks()
                 .onEach { banks ->
                     _state.value = MainState.Idle(
-                        User(
+                        UserModel(
                             settingsCache.fetchUserFirstName()!!,
                             settingsCache.fetchUserLastName()!!,
                             settingsCache.fetchUserPhone()!!,

@@ -25,25 +25,26 @@
                 android:background="@color/collapsingToolBarGrey">
 
                 <TextView
+                    android:id="@+id/name_intro"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/two_space"
+                    android:lineSpacingExtra="16dp"
                     android:text="@string/home_hello_intro"
-                    android:id="@+id/name_intro"
                     android:textSize="@dimen/collapsing_toolbar_title"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:lineHeight="30dp"
                     app:layout_constraintEnd_toStartOf="@id/intro_guide"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:layout_width="wrap_content"
-                    app:layout_constraintGuide_percent="0.6"
-                    android:orientation="vertical"
                     android:id="@+id/intro_guide"
-                    android:layout_height="match_parent"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.6" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -54,17 +55,13 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.MaterialComponents.ActionBar"
                 app:title="@string/title_home" />
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycler_view"
         app:behavior_overlapTop="40dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

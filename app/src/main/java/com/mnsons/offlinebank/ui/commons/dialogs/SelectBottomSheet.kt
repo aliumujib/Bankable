@@ -3,9 +3,9 @@ package com.mnsons.offlinebank.ui.commons.dialogs
 import android.os.Bundle
 import android.view.View
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
+import com.mnsons.offlinebank.model.bank.BankModel
 import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.commons.base.BaseRoundedBottomSheetDialogFragment
 import com.mnsons.offlinebank.utils.ext.slightDelay
 import kotlinx.android.synthetic.main.layout_select_bank_bottom_sheet.*

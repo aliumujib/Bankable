@@ -3,7 +3,7 @@ package com.mnsons.offlinebank.ui.main.accountbalance
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.model.bank.BankModel
 import javax.inject.Inject
 
 class AccountBalanceViewModel @Inject constructor() : ViewModel() {
