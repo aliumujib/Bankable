@@ -23,7 +23,6 @@ import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
-import com.mnsons.offlinebank.utils.DummyData
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import io.cabriole.decorator.GridSpanMarginDecoration
@@ -37,10 +36,11 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     @Inject
     lateinit var homeViewModel: HomeViewModel
 
-    private val gtBankBalanceCall = registerForActivityResult(CheckGTBankBalanceContract()) { result ->
+    private val gtBankBalanceCall =
+        registerForActivityResult(CheckGTBankBalanceContract()) { result ->
             Toast.makeText(context, result, Toast.LENGTH_LONG).show()
             Log.i("MyActivity", "Obtained result: $result")
-    }
+        }
 
     private lateinit var _binding: FragmentHomeBinding
 
@@ -111,7 +111,8 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     private fun handleStates(mainState: MainState) {
         if (mainState is MainState.Idle) {
             mainState.user?.let {
-                _binding.nameIntro.text = requireContext().getString(R.string.home_hello_intro, it.firstName)
+                _binding.nameIntro.text =
+                    requireContext().getString(R.string.home_hello_intro, it.firstName)
             }
         }
     }

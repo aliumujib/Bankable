@@ -7,7 +7,7 @@
     tools:context=".ui.main.accountbalance.AccountBalanceFragment">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/your_account_balance_s_are"
@@ -27,11 +27,12 @@
         android:layout_margin="16dp"
         tools:listitem="@layout/item_account_balance"
         tools:itemCount="4"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnClose"

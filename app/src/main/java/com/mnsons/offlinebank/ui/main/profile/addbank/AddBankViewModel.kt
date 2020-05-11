@@ -6,11 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.model.User
-import com.mnsons.offlinebank.model.mapInto
-import com.mnsons.offlinebank.model.toBankCacheModel
-import com.mnsons.offlinebank.ui.main.presentation.MainState
+import com.mnsons.offlinebank.model.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +19,24 @@ class AddBankViewModel @Inject constructor(
 
     private val _state = MutableLiveData<AddBankState>()
     val state: LiveData<AddBankState> = _state
+
+    init {
+        if (settingsCache.userDataExists()) {
+            banksCache.getBanks()
+                .onEach { banks ->
+                    _state.value = AddBankState.Idle(
+                        User(
+                            settingsCache.fetchUserFirstName()!!,
+                            settingsCache.fetchUserLastName()!!,
+                            settingsCache.fetchUserPhone()!!,
+                            banks.mapInto {
+                                it.toBankModel()
+                            }
+                        )
+                    )
+                }.launchIn(viewModelScope)
+        }
+    }
 
     fun updateUserBanks(banks: List<BankModel>) {
         if (banks.isEmpty()) {

@@ -20,7 +20,6 @@ import androidx.annotation.VisibleForTesting.PRIVATE
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.di.scopes.ActivityScope
-import com.mnsons.offlinebank.di.scopes.FragmentScope
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.utils.ext.viewModel
