@@ -1,5 +1,5 @@
 # Bankable
-<img src="SCREENDATA/image.png" width="250" />
+<img src="https://raw.githubusercontent.com/aliumujib/MnSonsApp/master/app_icon.png" width="250" />
 
 ### Introduction
 Android banking app uses Hover's USSD sdk to power fully offline banking and transaction analytics. The app aggregates banking operations of different app into one
