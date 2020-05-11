@@ -37,7 +37,7 @@ class TransactionsAdapter : RecyclerView.Adapter<TransactionsAdapter.Transaction
             itemView.ivTypeIcon.setImageResource(TransactionUtil.getIconByType(transaction.type))
             itemView.tvType.text = transaction.type.value
             itemView.tvBankName.text = transaction.bank
-            itemView.tvAmount.text = transaction.amount.toString()
+            itemView.tvAmount.text = "N ${transaction.amount}"
         }
 
     }

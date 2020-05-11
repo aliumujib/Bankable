@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +26,7 @@ import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.utils.CheckBalanceUtil
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
+import com.mnsons.offlinebank.utils.ext.showSnackbar
 import io.cabriole.decorator.GridSpanMarginDecoration
 import javax.inject.Inject
 
@@ -57,7 +57,9 @@ class HomeFragment : Fragment(), MenuActionClickListener {
                     }
                 }
             } else {
-                Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+                result.message?.let {
+                    showSnackbar(it)
+                }
             }
         }
 
@@ -135,6 +137,11 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     }
 
     override fun onMenuActionClick(model: MenuAction) {
+        if (model is MenuAction.PayBills || model is MenuAction.BuyData) {
+            showSnackbar("This operation is not yet available!")
+            return
+        }
+
         mainViewModel.state.value?.user?.banks?.let {
             SelectBottomSheet(it) { bank ->
                 navigate(model, bank)
@@ -161,11 +168,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
             MenuAction.CheckAccountBalance -> {
                 CheckBalanceUtil.getActionIdByBankId(bank.id)?.let {
                     accountBalanceCall.launch(it)
-                } ?: Toast.makeText(
-                    context,
-                    "Account Balance Check for ${bank.bankName} is currently not supported",
-                    Toast.LENGTH_SHORT
-                ).show()
+                } ?: showSnackbar("Account Balance Check for ${getString(bank.bankName)} is currently not supported")
             }
         }
     }
