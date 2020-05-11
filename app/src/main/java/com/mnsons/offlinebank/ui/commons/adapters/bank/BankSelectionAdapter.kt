@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.commons.adapters
+package com.mnsons.offlinebank.ui.commons.adapters.bank
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.model.bank.BankModel
 import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankSelectionAdapter(

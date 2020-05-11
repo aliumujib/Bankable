@@ -2,17 +2,14 @@ package com.mnsons.offlinebank.ui.main.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
@@ -32,15 +29,6 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
-
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
-
-    private val gtBankBalanceCall =
-        registerForActivityResult(CheckGTBankBalanceContract()) { result ->
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
-            Log.i("MyActivity", "Obtained result: $result")
-        }
 
     private lateinit var _binding: FragmentHomeBinding
 
@@ -65,7 +53,6 @@ class HomeFragment : Fragment(), MenuActionClickListener {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return _binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,7 +94,6 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     }
 
-
     private fun handleStates(mainState: MainState) {
         if (mainState is MainState.Idle) {
             mainState.user?.let {
@@ -136,7 +122,9 @@ class HomeFragment : Fragment(), MenuActionClickListener {
                         )
                     }
                     MenuAction.CheckAccountBalance -> {
-                        gtBankBalanceCall.launch("19142a42")
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionNavigationHomeToAccountBalanceFragment(bank)
+                        )
                     }
                 }
             }.show(childFragmentManager, javaClass.simpleName)

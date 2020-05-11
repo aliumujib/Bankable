@@ -3,9 +3,9 @@ package com.mnsons.offlinebank.ui.commons.dialogs
 import android.os.Bundle
 import android.view.View
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
+import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionListener
 import com.mnsons.offlinebank.ui.commons.base.BaseRoundedBottomSheetDialogFragment
 import com.mnsons.offlinebank.utils.ext.delayForASecond
 import kotlinx.android.synthetic.main.layout_select_bank_bottom_sheet.*
@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.layout_select_bank_bottom_sheet.*
 class SelectBankBottomSheet(
     private val banks: List<BankModel>,
     private val selectBankListener: (BankModel) -> Unit
-) : BaseRoundedBottomSheetDialogFragment(), BankSelectionListener<BankModel> {
+) : BaseRoundedBottomSheetDialogFragment(),
+    BankSelectionListener<BankModel> {
 
     private val bankSelectionAdapter by lazy {
         BankSelectionAdapter(

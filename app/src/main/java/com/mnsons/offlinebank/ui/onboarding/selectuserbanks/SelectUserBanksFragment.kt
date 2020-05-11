@@ -14,9 +14,9 @@ import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.databinding.FragmentSelectUserBanksBinding
 import com.mnsons.offlinebank.di.onboarding.DaggerOnBoardingComponent
 import com.mnsons.offlinebank.di.onboarding.OnBoardingModule
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
+import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
+import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionListener
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
 import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingState

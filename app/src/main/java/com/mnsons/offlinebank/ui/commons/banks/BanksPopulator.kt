@@ -1,7 +1,7 @@
 package com.mnsons.offlinebank.ui.commons.banks
 
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.model.bank.BankModel
 
 object BanksPopulator {
 

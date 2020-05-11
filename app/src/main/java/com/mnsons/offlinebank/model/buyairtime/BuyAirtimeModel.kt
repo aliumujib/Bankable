@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.model
+package com.mnsons.offlinebank.model.buyairtime
 
 data class BuyAirtimeModel(
     val actionId: String,

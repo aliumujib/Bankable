@@ -1,4 +1,4 @@
-package com.mnsons.offlinebank.ui.commons.adapters
+package com.mnsons.offlinebank.ui.commons.adapters.bank
 
 interface BankSelectionListener<T> {
 

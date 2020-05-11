@@ -41,4 +41,5 @@
     <string name="transaction_success_message">Your transaction has been \ncompleted successfully</string>
     <string name="failed_transaction_message">Your transaction failed.\nPlease try again later.</string>
     <string name="your_account_balance_s_are">Your account balance(s) are:</string>
+    <string name="all_banks">All Banks</string>
 </resources>

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.model.User
+import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.model.user.UserModel
 import com.mnsons.offlinebank.model.mapInto
 import com.mnsons.offlinebank.model.toBankCacheModel
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
@@ -22,7 +22,7 @@ class OnBoardingViewModel constructor(
 
     val banks = BanksPopulator.fetchSupportedBanks()
 
-    private var user: User? = null
+    private var user: UserModel? = null
 
     fun setUserDetails(firstName: String, lastName: String, phoneNumber: String) {
         when {
@@ -36,7 +36,12 @@ class OnBoardingViewModel constructor(
                 _state.value = OnBoardingState.Error(Throwable("Please input your phone number"))
             }
             else -> {
-                user = User(firstName, lastName, phoneNumber, emptyList())
+                user = UserModel(
+                    firstName,
+                    lastName,
+                    phoneNumber,
+                    emptyList()
+                )
                 user?.let {
                     _state.value = OnBoardingState.Editing(it)
                 }
