@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.BuyAirtimeContract
 import com.mnsons.offlinebank.databinding.FragmentBuyAirtimeBinding
@@ -18,6 +17,7 @@ import com.mnsons.offlinebank.ui.commons.dialogs.TransactionStatusDialog
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.BuyAirtimeUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
+import com.mnsons.offlinebank.utils.ext.showSnackbar
 import javax.inject.Inject
 
 class BuyAirtimeFragment : Fragment() {
@@ -82,13 +82,7 @@ class BuyAirtimeFragment : Fragment() {
                     buyAirtimeCall.launch(it)
                 }
             }
-            is BuyAirtimeState.Error -> {
-                Snackbar.make(
-                    _binding.root,
-                    buyAirtimeState.error?.message.toString(),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            is BuyAirtimeState.Error -> showSnackbar(buyAirtimeState.error?.message.toString())
         }
     }
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.databinding.FragmentAddBankBinding
 import com.mnsons.offlinebank.model.bank.BankModel
 import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
@@ -16,6 +15,7 @@ import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
+import com.mnsons.offlinebank.utils.ext.showSnackbar
 import kotlinx.android.synthetic.main.fragment_add_bank.*
 import javax.inject.Inject
 
@@ -93,13 +93,7 @@ class AddBankFragment : Fragment(),
             is AddBankState.Editing -> {
                 findNavController().navigateUp()
             }
-            is AddBankState.Error -> {
-                Snackbar.make(
-                    _binding.root,
-                    addBankState.error?.message.toString(),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            is AddBankState.Error -> showSnackbar(addBankState.error?.message.toString())
         }
     }
 

@@ -15,13 +15,18 @@
  */
 package com.mnsons.offlinebank.utils.ext
 
-import android.app.Activity
+import android.graphics.Color
+import android.view.Gravity
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Generic view model provider.
@@ -78,4 +83,17 @@ fun Fragment.onBackPressed(block: () -> Unit) {
             }
         }
     )
+}
+
+fun Fragment.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_LONG) {
+    activity?.let {
+        val snack = Snackbar.make(it.findViewById(android.R.id.content), snackbarText, timeLength)
+        val view = snack.view
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+        view.layoutParams = params
+        val tv = view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView
+        tv.setTextColor(Color.WHITE)
+        snack.show()
+    }
 }

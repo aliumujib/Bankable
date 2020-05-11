@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.MoneyTransferContract
 import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
@@ -21,6 +20,7 @@ import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.utils.TransferMoneyUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.onBackPressed
+import com.mnsons.offlinebank.utils.ext.showSnackbar
 import javax.inject.Inject
 
 class TransferMoneyFragment : Fragment() {
@@ -98,13 +98,7 @@ class TransferMoneyFragment : Fragment() {
                     moneyTransferContract.launch(it)
                 }
             }
-            is TransferMoneyState.Error -> {
-                Snackbar.make(
-                    _binding.root,
-                    transferMoneyState.error?.message.toString(),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            is TransferMoneyState.Error -> showSnackbar(transferMoneyState.error?.message.toString())
         }
     }
 

@@ -45,7 +45,7 @@ class SectionedTransactionsAdapter(
             val totalAmount = sectionedTransaction.transactions.sumByDouble { it.amount }
             val transactionsCount = sectionedTransaction.transactions.size
 
-            itemView.tvDescription.text = "You spent $totalAmount on $transactionsCount Transactions"
+            itemView.tvDescription.text = "You spent N$totalAmount on $transactionsCount Transactions"
 
             itemView.rvTransactions.adapter = transactionsAdapter
             transactionsAdapter.setTransactions(sectionedTransaction.transactions)
