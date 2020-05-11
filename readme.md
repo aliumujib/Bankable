@@ -21,7 +21,6 @@ be adding only new contracts for the bank, and an SVG logo image for each bank. 
 
 
 ### Possible Improvements
-
 We had a lot of fun building this. There are some improvements we intend to make.
 
 - Write tests. </br>
