@@ -11,10 +11,13 @@ import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.LayoutTransactionOutcomeBinding
 
 
-class SuccessFailureDialog : DialogFragment() {
+class TransactionStatusDialog : DialogFragment() {
 
     private lateinit var _binding: LayoutTransactionOutcomeBinding
     private var dialogView: View? = null
+
+    private var onCloseClickListener: (()->Unit)? = null
+
 
     interface OnCloseClickListener {
         fun onClose()
@@ -72,12 +75,22 @@ class SuccessFailureDialog : DialogFragment() {
         val messages = arguments?.getString(_MESSAGE)
 
 
-        if(status){
+        if (status) {
             _binding.image.setImageResource(R.drawable.ic_transaction_success)
-        }else{
+        } else {
             _binding.image.setImageResource(R.drawable.ic_transaction_failure)
         }
         _binding.textView2.text = messages
+        _binding.btnClose.setOnClickListener {
+            onCloseClickListener?.invoke()
+            dismiss()
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        onCloseClickListener = null
     }
 
     companion object {
@@ -89,9 +102,11 @@ class SuccessFailureDialog : DialogFragment() {
         fun display(
             fragmentManager: FragmentManager,
             status: Boolean,
-            message: String
-        ): SuccessFailureDialog {
-            val successFailureDialog = SuccessFailureDialog()
+            message: String,
+            onCloseClickListener: (()->Unit)
+        ): TransactionStatusDialog {
+            val successFailureDialog = TransactionStatusDialog()
+            successFailureDialog.onCloseClickListener = onCloseClickListener
             successFailureDialog.arguments = Bundle().apply {
                 putString(_MESSAGE, message)
                 putBoolean(_STATUS, status)

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
@@ -14,7 +15,7 @@ import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
 import com.mnsons.offlinebank.di.main.transferfunds.DaggerTransferFundsComponent
 import com.mnsons.offlinebank.di.main.transferfunds.TransferFundsModule
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectFromMenuBottomSheet
-import com.mnsons.offlinebank.ui.commons.dialogs.SuccessFailureDialog
+import com.mnsons.offlinebank.ui.commons.dialogs.TransactionStatusDialog
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.onBackPressed
@@ -29,13 +30,14 @@ class TransferMoneyFragment : Fragment() {
 
     private val sourceBank: TransferMoneyFragmentArgs by navArgs()
 
-    private val moneyTransferContract =
-        registerForActivityResult(MoneyTransferContract()) { result ->
-            SuccessFailureDialog.display(
+    private val moneyTransferContract = registerForActivityResult(MoneyTransferContract()) { result ->
+            TransactionStatusDialog.display(
                 childFragmentManager,
                 result.data != null,
                 result.error ?: requireContext().getString(R.string.success)
-            )
+            ) {
+                findNavController().popBackStack()
+            }
         }
 
     private fun injectDependencies() {
