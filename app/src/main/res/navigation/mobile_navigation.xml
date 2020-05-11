@@ -24,6 +24,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_home_to_accountBalanceFragment"
+            app:destination="@id/accountBalanceFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -67,6 +74,15 @@
         android:name="com.mnsons.offlinebank.ui.main.transfermoney.TransferMoneyFragment"
         android:label="Transfer Money"
         tools:layout="@layout/fragment_transfer_money" >
+        <argument
+            android:name="bank"
+            app:argType="com.mnsons.offlinebank.model.BankModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountBalanceFragment"
+        android:name="com.mnsons.offlinebank.ui.main.accountbalance.AccountBalanceFragment"
+        android:label="fragment_account_balance"
+        tools:layout="@layout/fragment_account_balance" >
         <argument
             android:name="bank"
             app:argType="com.mnsons.offlinebank.model.BankModel" />

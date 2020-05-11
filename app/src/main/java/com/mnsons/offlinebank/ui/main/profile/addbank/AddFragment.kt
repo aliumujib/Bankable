@@ -12,21 +12,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.databinding.FragmentAddBankBinding
 import com.mnsons.offlinebank.model.BankModel
 import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
-import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
+import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionListener
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import com.mnsons.offlinebank.ui.main.MainActivity
-import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import kotlinx.android.synthetic.main.fragment_add_bank.*
 import javax.inject.Inject
 
-class AddFragment : Fragment(),
-    SelectionListener<BankModel> {
+class AddBankFragment : Fragment(),
+    BankSelectionListener<BankModel> {
 
     private lateinit var _binding: FragmentAddBankBinding
-
-    @Inject
-    lateinit var mainViewModel: MainViewModel
 
     @Inject
     lateinit var addBankViewModel: AddBankViewModel
