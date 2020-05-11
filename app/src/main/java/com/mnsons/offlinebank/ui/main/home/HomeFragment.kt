@@ -5,22 +5,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
 import com.mnsons.offlinebank.model.bank.BankModel
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectBottomSheet
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
+import com.mnsons.offlinebank.ui.main.accountbalance.AccountBalanceFragment
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
+import com.mnsons.offlinebank.utils.CheckBalanceUtil
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import io.cabriole.decorator.GridSpanMarginDecoration
@@ -31,10 +35,31 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     @Inject
     lateinit var mainViewModel: MainViewModel
 
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
-
     private lateinit var _binding: FragmentHomeBinding
+
+    private val accountBalanceCall =
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
+            if (result.data != null) {
+                val stringList =
+                    result.data?.split(')')
+                        ?.filter { it.contains("NGN") }
+                        ?.map {
+                            it.replace(":", "")
+                            it.replace("(", "")
+                        }
+
+                stringList?.let {
+                    AccountBalanceFragment.display(
+                        childFragmentManager,
+                        it
+                    ) {
+                        findNavController().popBackStack()
+                    }
+                }
+            } else {
+                Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -134,11 +159,13 @@ class HomeFragment : Fragment(), MenuActionClickListener {
                 )
             }
             MenuAction.CheckAccountBalance -> {
-                findNavController().navigate(
-                    HomeFragmentDirections.actionNavigationHomeToAccountBalanceFragment(
-                        bank
-                    )
-                )
+                CheckBalanceUtil.getActionIdByBankId(bank.id)?.let {
+                    accountBalanceCall.launch(it)
+                } ?: Toast.makeText(
+                    context,
+                    "Account Balance Check for ${bank.bankName} is currently not supported",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

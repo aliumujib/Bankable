@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentUserDetailsBinding
 import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.main.MainActivity
@@ -46,7 +45,7 @@ class UserDetailsFragment : Fragment() {
         nonNullObserve(mainViewModel.state, ::handleStates)
 
         _binding.btnAddBank.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_navigation_add_bank)
+            findNavController().navigate(UserDetailsFragmentDirections.actionNavigationProfileToNavigationAddBank())
         }
     }
 
