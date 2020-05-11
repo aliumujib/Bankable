@@ -4,9 +4,8 @@ import androidx.fragment.app.Fragment
 import com.mnsons.offlinebank.contracts.access.FetchAccessBankOtherBanksContract
 import com.mnsons.offlinebank.contracts.gtb.FetchGTBankOtherBanksFirstPageContract
 import com.mnsons.offlinebank.model.BankMenuModel
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.model.bank.BankModel
 import javax.inject.Inject
-
 
 class BankTransferMenuIndexer @Inject constructor(
     private val successAction: (bankId: Int, List<BankMenuModel>) -> Unit,
@@ -44,7 +43,6 @@ class BankTransferMenuIndexer @Inject constructor(
             finishedAction.invoke()
         }
     }
-
 
     private fun runContractForBank(bankModel: BankModel) {
         if (bankModel.id == 1) {

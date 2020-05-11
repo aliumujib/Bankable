@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
 import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankSelectionAdapter(
