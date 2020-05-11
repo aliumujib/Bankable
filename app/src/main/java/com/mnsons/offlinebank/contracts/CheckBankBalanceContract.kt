@@ -18,6 +18,7 @@ class CheckBankBalanceContract : ActivityResultContract<String, USSDResult<Strin
         input?.let {
             return HoverParameters.Builder(context)
                 .request(it)
+                .style(R.style.Theme_Hover)
                 .buildIntent()
         } ?: throw InvalidParameterException("Please enter the correct parameters")
     }

@@ -23,6 +23,7 @@ class MoneyTransferContract : ActivityResultContract<MoneyTransferModel, USSDRes
                 .extra("amount", it.amount)
                 .extra("bankAccountNumber", it.accountNumber)
                 .extra("recipientBank", it.recipientBank.toString())
+                .style(R.style.Theme_Hover)
                 .buildIntent()
         } ?: throw InvalidParameterException()
     }

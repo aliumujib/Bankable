@@ -18,6 +18,7 @@ class FetchGTBankOtherBanksFirstPageContract :
         this.context = context
         return HoverParameters.Builder(context)
             .request("896119e1")
+            .style(R.style.Theme_Hover)
             .buildIntent()
     }
 
