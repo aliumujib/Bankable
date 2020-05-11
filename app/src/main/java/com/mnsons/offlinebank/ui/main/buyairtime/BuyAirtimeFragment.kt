@@ -6,13 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.BuyAirtimeContract
 import com.mnsons.offlinebank.databinding.FragmentBuyAirtimeBinding
-import com.mnsons.offlinebank.ui.commons.dialogs.SuccessFailureDialog
+import com.mnsons.offlinebank.model.transaction.TransactionStatus
+import com.mnsons.offlinebank.ui.commons.dialogs.TransactionStatusDialog
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.BuyAirtimeUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
@@ -25,13 +27,23 @@ class BuyAirtimeFragment : Fragment() {
     @Inject
     lateinit var buyAirtimeViewModel: BuyAirtimeViewModel
 
+    private val bankArg: BuyAirtimeFragmentArgs by navArgs()
+
     private val buyAirtimeCall =
         registerForActivityResult(BuyAirtimeContract()) { result ->
-            SuccessFailureDialog.display(
+            if (result.data != null) {
+                buyAirtimeViewModel.persistTransaction(TransactionStatus.SUCCESS)
+            } else {
+                buyAirtimeViewModel.persistTransaction(TransactionStatus.FAILED)
+            }
+
+            TransactionStatusDialog.display(
                 childFragmentManager,
                 result.data != null,
-                result.error ?: requireContext().getString(R.string.success)
-            )
+                result.message ?: requireContext().getString(R.string.success)
+            ) {
+                findNavController().popBackStack()
+            }
             Log.i(javaClass.simpleName, "Obtained result: $result")
         }
 
@@ -55,7 +67,8 @@ class BuyAirtimeFragment : Fragment() {
             buyAirtimeViewModel.initiateBuyAirtime(
                 BuyAirtimeUtil.getActionIdByBankId(buyAirtimeViewModel.bank.id),
                 _binding.airtimeDetailsContainer.etAmount.text.toString(),
-                _binding.airtimeDetailsContainer.etPhoneNumber.text.toString()
+                _binding.airtimeDetailsContainer.etPhoneNumber.text.toString(),
+                requireContext().getString(bankArg.bank.bankName)
             )
         }
 

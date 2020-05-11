@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
@@ -13,8 +14,9 @@ import com.mnsons.offlinebank.contracts.MoneyTransferContract
 import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
 import com.mnsons.offlinebank.di.main.transferfunds.DaggerTransferFundsComponent
 import com.mnsons.offlinebank.di.main.transferfunds.TransferFundsModule
+import com.mnsons.offlinebank.model.transaction.TransactionStatus
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectFromMenuBottomSheet
-import com.mnsons.offlinebank.ui.commons.dialogs.SuccessFailureDialog
+import com.mnsons.offlinebank.ui.commons.dialogs.TransactionStatusDialog
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.onBackPressed
@@ -31,11 +33,20 @@ class TransferMoneyFragment : Fragment() {
 
     private val moneyTransferContract =
         registerForActivityResult(MoneyTransferContract()) { result ->
-            SuccessFailureDialog.display(
+
+            if (result.data != null) {
+                transferMoneyViewModel.persistTransaction(TransactionStatus.SUCCESS)
+            } else {
+                transferMoneyViewModel.persistTransaction(TransactionStatus.FAILED)
+            }
+
+            TransactionStatusDialog.display(
                 childFragmentManager,
                 result.data != null,
-                result.error ?: requireContext().getString(R.string.success)
-            )
+                result.message ?: requireContext().getString(R.string.success)
+            ) {
+                findNavController().popBackStack()
+            }
         }
 
     private fun injectDependencies() {
@@ -67,13 +78,15 @@ class TransferMoneyFragment : Fragment() {
             transferMoneyViewModel.initiateFundTransfer(
                 "75872765",
                 _binding.transferDetailsContainer.etAmount.text.toString(),
-                _binding.transferDetailsContainer.accountNumber.text.toString()
+                _binding.transferDetailsContainer.accountNumber.text.toString(),
+                requireContext().getString(sourceBank.bank.bankName)
             )
         }
 
         _binding.transferDetailsContainer.recipientBank.setOnClickListener {
             openBankSelector()
         }
+
         nonNullObserve(transferMoneyViewModel.state, ::handleStates)
     }
 

@@ -2,6 +2,7 @@ package com.mnsons.offlinebank.di.main.buyairtime
 
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
+import com.mnsons.offlinebank.data.cache.impl.TransactionsCache
 import com.mnsons.offlinebank.di.scopes.FragmentScope
 import com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeFragment
 import com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeViewModel
@@ -22,8 +23,8 @@ class BuyAirtimeModule(
 
     @FragmentScope
     @Provides
-    fun providesBuyAirtimeViewModel() = fragment.viewModel {
-        BuyAirtimeViewModel()
+    fun providesBuyAirtimeViewModel(transactionsCache: TransactionsCache) = fragment.viewModel {
+        BuyAirtimeViewModel(transactionsCache)
     }
 
 }

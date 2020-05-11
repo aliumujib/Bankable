@@ -19,6 +19,7 @@ package com.mnsons.offlinebank.di.main
 import android.content.Context
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
+import com.mnsons.offlinebank.data.cache.impl.TransactionsCache
 import com.mnsons.offlinebank.di.components.CoreComponent
 import com.mnsons.offlinebank.di.scopes.ActivityScope
 import com.mnsons.offlinebank.ui.main.MainActivity
@@ -46,6 +47,8 @@ interface MainComponent {
     fun settingsCache(): SettingsCache
 
     fun banksCache(): BanksCache
+
+    fun transactionsCache(): TransactionsCache
 
     fun inject(mainActivity: MainActivity)
 
