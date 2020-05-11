@@ -13,7 +13,7 @@ be adding only new contracts for the bank, and an SVG logo image for each bank. 
 - Aggregate USSD banking services in one place so the user doesn't have to remember them all.
 
 ### Used libraries
-**Hover SDK** - Network calls</br>
+**Hover SDK** - USSD calls</br>
 **Dagger2** - Dagger2 was used for dependency injection.</br>
 **Kotlin Flow** - Kotlin Flow was used for threading and data stream management.</br>
 **AndroidKtx** - For cool extensions to Android classes.</br>
