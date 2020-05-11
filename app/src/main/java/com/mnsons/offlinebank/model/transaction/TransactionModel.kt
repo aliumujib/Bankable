@@ -14,8 +14,8 @@ enum class TransactionType(val value: String) {
     BALANCE_CHECK("Account Balance Check")
 }
 
-enum class TransactionStatus {
-    SUCCESS,
-    PENDING,
-    FAILED
+enum class TransactionStatus(val value: Int) {
+    SUCCESS(1),
+    PENDING(2),
+    FAILED(3)
 }

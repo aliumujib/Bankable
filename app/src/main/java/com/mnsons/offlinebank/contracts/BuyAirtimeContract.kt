@@ -47,7 +47,10 @@ class BuyAirtimeContract : ActivityResultContract<BuyAirtimeModel, USSDResult<Un
 
     private fun parseSessionMessage(text: String): USSDResult<Unit> {
         return when {
-            text.contains("successful", ignoreCase = true) or text.contains("request processing", ignoreCase = true) -> {
+            text.contains("processing", ignoreCase = true) or text.contains(
+                "successful",
+                ignoreCase = true
+            ) -> {
                 USSDResult(context.getString(R.string.transaction_successful), Unit)
             }
             text.contains("No Account is funded") -> {

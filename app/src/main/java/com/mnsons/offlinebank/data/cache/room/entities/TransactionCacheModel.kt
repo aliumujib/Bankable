@@ -11,7 +11,7 @@ data class TransactionCacheModel(
     var id: String,
     var amount: Double,
     var timestamp: Long,
-    var type: TransactionType,
-    var status: TransactionStatus,
+    var type: String,
+    var status: Int,
     var bank: String
 )

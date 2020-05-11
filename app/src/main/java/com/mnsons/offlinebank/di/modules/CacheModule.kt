@@ -22,6 +22,7 @@ import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.data.cache.room.DBClass
 import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
 import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
+import com.mnsons.offlinebank.data.cache.room.dao.TransactionsDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -35,6 +36,12 @@ class CacheModule {
     @Provides
     fun providesBanksDao(dBClass: DBClass): BanksDao {
         return dBClass.banksDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesTransactionsDao(dBClass: DBClass): TransactionsDao {
+        return dBClass.transactionsDao()
     }
 
 

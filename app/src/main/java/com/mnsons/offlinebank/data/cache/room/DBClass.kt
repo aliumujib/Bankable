@@ -21,12 +21,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
 import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
+import com.mnsons.offlinebank.data.cache.room.dao.TransactionsDao
 import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
 import com.mnsons.offlinebank.data.cache.room.entities.BankMenuCacheModel
+import com.mnsons.offlinebank.data.cache.room.entities.TransactionCacheModel
 
 
 @Database(
-    entities = [BankCacheModel::class, BankMenuCacheModel::class],
+    entities = [BankCacheModel::class, BankMenuCacheModel::class, TransactionCacheModel::class],
     version = 1, exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -35,5 +37,7 @@ abstract class DBClass : RoomDatabase() {
     abstract fun banksDao(): BanksDao
 
     abstract fun bankMenuDao(): BankMenuDao
+
+    abstract fun transactionsDao(): TransactionsDao
 
 }
