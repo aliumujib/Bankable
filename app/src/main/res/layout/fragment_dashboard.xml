@@ -9,15 +9,20 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_toolbar_height">
+        android:layout_height="@dimen/dashboard_title_toolbar_height">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collasping_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|snap"
             android:background="@color/white"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleEnabled="false">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/collapsingToolBarGrey"
+                android:layout_height="match_parent"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -30,18 +35,20 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="pin"
-                android:background="@color/collapsingToolBarGrey">
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingTop="@dimen/two_space">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/banksFilterContainer"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="50dp"
                     android:layout_marginBottom="32dp"
                     app:cardCornerRadius="10dp"
+                    android:layout_marginTop="@dimen/half_space"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
