@@ -18,6 +18,7 @@ import com.mnsons.offlinebank.model.transaction.TransactionStatus
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectFromMenuBottomSheet
 import com.mnsons.offlinebank.ui.commons.dialogs.TransactionStatusDialog
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
+import com.mnsons.offlinebank.utils.TransferMoneyUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.onBackPressed
 import javax.inject.Inject
@@ -76,7 +77,7 @@ class TransferMoneyFragment : Fragment() {
 
         _binding.transferDetailsContainer.btnNext.setOnClickListener {
             transferMoneyViewModel.initiateFundTransfer(
-                "75872765",
+                TransferMoneyUtil.getActionIdByBankId(sourceBank.bank.id),
                 _binding.transferDetailsContainer.etAmount.text.toString(),
                 _binding.transferDetailsContainer.accountNumber.text.toString(),
                 requireContext().getString(sourceBank.bank.bankName)
