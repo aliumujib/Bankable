@@ -1,6 +1,7 @@
 package com.mnsons.offlinebank.model.transaction
 
 data class TransactionModel(
+    val id: String,
     val amount: Double,
     val timestamp: Long,
     val type: TransactionType,

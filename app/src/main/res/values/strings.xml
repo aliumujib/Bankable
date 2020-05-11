@@ -51,4 +51,6 @@
     <string name="success">Your transaction has been completed successfully</string>
 
     <string name="all_banks">All Banks</string>
+    <string name="bank_transfer">Bank Transfer</string>
+    <string name="airtime_purchase">Airtime Purchase</string>
 </resources>
