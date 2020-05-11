@@ -1,7 +1,6 @@
 package com.mnsons.offlinebank.data.cache.impl
 
 import com.mnsons.offlinebank.data.cache.room.dao.TransactionsDao
-import com.mnsons.offlinebank.data.cache.room.entities.TransactionCacheModel
 import com.mnsons.offlinebank.model.mapInto
 import com.mnsons.offlinebank.model.toTransactionCacheModel
 import com.mnsons.offlinebank.model.toTransactionModel

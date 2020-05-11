@@ -15,7 +15,7 @@ be adding only new contracts for the bank, and an SVG logo image for each bank. 
 ### Used libraries
 **Hover SDK** - Network calls</br>
 **Dagger2** - Dagger2 was used for dependency injection.</br>
-**Kotlin Flow** - RxJava2 was used for threading and data stream management.</br>
+**Kotlin Flow** - Kotlin Flow was used for threading and data stream management.</br>
 **AndroidKtx** - For cool extensions to Android classes.</br>
 **Architecture Components** - For Lifecycle management etc.</br>
 

@@ -14,7 +14,6 @@ fun <I, O> List<I>.mapInto(function: (input: I) -> O): List<O> {
     }
 }
 
-
 fun TransactionModel.toTransactionCacheModel(): TransactionCacheModel {
     return TransactionCacheModel(
         UUID.randomUUID().toString(),
@@ -25,7 +24,6 @@ fun TransactionModel.toTransactionCacheModel(): TransactionCacheModel {
         bank
     )
 }
-
 
 fun TransactionCacheModel.toTransactionModel(): TransactionModel {
     return TransactionModel(

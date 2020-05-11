@@ -14,20 +14,19 @@
         android:textSize="@dimen/text_16"
         android:textStyle="bold"
         android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/rvBanks"
+        app:layout_constraintBottom_toTopOf="@+id/rvAccountBalances"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBanks"
+        android:id="@+id/rvAccountBalances"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         tools:listitem="@layout/item_account_balance"
         tools:itemCount="4"
-        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,12 +18,6 @@ class TransactionStatusDialog : DialogFragment() {
 
     private var onCloseClickListener: (()->Unit)? = null
 
-
-    interface OnCloseClickListener {
-        fun onClose()
-        fun onBackPressed()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.Theme_FullScreenDialog)
@@ -74,13 +68,14 @@ class TransactionStatusDialog : DialogFragment() {
         val status = arguments?.getBoolean(_STATUS) ?: false
         val messages = arguments?.getString(_MESSAGE)
 
-
         if (status) {
             _binding.image.setImageResource(R.drawable.ic_transaction_success)
         } else {
             _binding.image.setImageResource(R.drawable.ic_transaction_failure)
         }
+
         _binding.textView2.text = messages
+
         _binding.btnClose.setOnClickListener {
             onCloseClickListener?.invoke()
             dismiss()

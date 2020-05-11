@@ -9,7 +9,7 @@ import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
 import java.security.InvalidParameterException
 
-class CheckBankBalanceContract : ActivityResultContract<String, String>() {
+class CheckBankBalanceContract : ActivityResultContract<String, USSDResult<String>>() {
 
     private lateinit var context: Context
 
@@ -23,9 +23,9 @@ class CheckBankBalanceContract : ActivityResultContract<String, String>() {
         } ?: throw InvalidParameterException("Please enter the correct parameters")
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?): String {
-        if (resultCode != Activity.RESULT_OK) return context.getString(R.string.error_index_)
-        if (intent == null) return context.getString(R.string.error_index_);
+    override fun parseResult(resultCode: Int, intent: Intent?): USSDResult<String> {
+        if (resultCode != Activity.RESULT_OK) return USSDResult(context.getString(R.string.error_index_))
+        if (intent == null) return USSDResult(context.getString(R.string.error_index_))
 
         val sessionTextArr: Array<String> =
             intent.getStringArrayExtra("session_messages") ?: emptyArray()
@@ -35,9 +35,23 @@ class CheckBankBalanceContract : ActivityResultContract<String, String>() {
         Log.d(CheckBankBalanceContract::class.java.simpleName, intent.toString())
 
         return if (sessionTextArr.isNotEmpty()) {
-            sessionTextArr.last()
+            parseSessionMessage(sessionTextArr.last())
         } else {
-            context.getString(R.string.error_index_)
+            USSDResult(context.getString(R.string.error_index_))
+        }
+    }
+
+    private fun parseSessionMessage(text: String): USSDResult<String> {
+        return when {
+            text.contains("NAME") or text.contains("BVN") -> {
+                USSDResult(context.getString(R.string.transaction_successful), text)
+            }
+            text.contains("No Account is funded") -> {
+                USSDResult(context.getString(R.string.transaction_n0t_successful))
+            }
+            else -> {
+                USSDResult(context.getString(R.string.error_index_))
+            }
         }
     }
 

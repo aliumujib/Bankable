@@ -2,7 +2,6 @@ package com.mnsons.offlinebank.ui.main.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +18,13 @@ import com.mnsons.offlinebank.di.main.home.HomeModule
 import com.mnsons.offlinebank.model.bank.BankModel
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectBottomSheet
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
+import com.mnsons.offlinebank.ui.main.accountbalance.AccountBalanceFragment
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAdapter
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
+import com.mnsons.offlinebank.utils.CheckBalanceUtil
 import com.mnsons.offlinebank.utils.ext.dpToPx
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import io.cabriole.decorator.GridSpanMarginDecoration
@@ -34,16 +35,31 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     @Inject
     lateinit var mainViewModel: MainViewModel
 
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
-
-    private val gtBankBalanceCall =
-        registerForActivityResult(CheckBankBalanceContract()) { result ->
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
-            Log.i("MyActivity", "Obtained result: $result")
-        }
-
     private lateinit var _binding: FragmentHomeBinding
+
+    private val accountBalanceCall =
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
+            if (result.data != null) {
+                val stringList =
+                    result.data?.split(')')
+                        ?.filter { it.contains("NGN") }
+                        ?.map {
+                            it.replace(":", "")
+                            it.replace("(", "")
+                        }
+
+                stringList?.let {
+                    AccountBalanceFragment.display(
+                        childFragmentManager,
+                        it
+                    ) {
+                        findNavController().popBackStack()
+                    }
+                }
+            } else {
+                Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -143,7 +159,13 @@ class HomeFragment : Fragment(), MenuActionClickListener {
                 )
             }
             MenuAction.CheckAccountBalance -> {
-                //gtBankMenuCall.launch(Unit)
+                CheckBalanceUtil.getActionIdByBankId(bank.id)?.let {
+                    accountBalanceCall.launch(it)
+                } ?: Toast.makeText(
+                    context,
+                    "Account Balance Check for ${bank.bankName} is currently not supported",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
