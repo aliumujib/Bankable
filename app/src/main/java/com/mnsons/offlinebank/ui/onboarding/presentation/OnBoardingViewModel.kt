@@ -1,14 +1,12 @@
 package com.mnsons.offlinebank.ui.onboarding.presentation
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
-import com.mnsons.offlinebank.model.BankModel
-import com.mnsons.offlinebank.model.User
-import com.mnsons.offlinebank.model.mapInto
-import com.mnsons.offlinebank.model.toBankCacheModel
+import com.mnsons.offlinebank.model.*
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import kotlinx.coroutines.launch
 
@@ -68,6 +66,14 @@ class OnBoardingViewModel constructor(
                     it.toBankCacheModel()
                 })
             }
+        }
+    }
+
+    fun saveMenuForBank(bankId: Int, data: List<BankMenuModel>?) {
+        viewModelScope.launch {
+           data?.let {
+               banksCache.saveBankMenuData(bankId, it)
+           }
         }
     }
 

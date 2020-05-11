@@ -13,26 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.di.main.addbanks
+package com.mnsons.offlinebank.data.cache.room.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.mnsons.offlinebank.model.BankMenuModel
 
-import com.mnsons.offlinebank.di.main.MainComponent
-import com.mnsons.offlinebank.di.scopes.FragmentScope
-import com.mnsons.offlinebank.ui.main.profile.addbank.AddFragment
-import dagger.Component
-
-/**
- * Class for which a fully-formed, dependency-injected implementation is to
- * be generated from [AddBanksModule].
- *
- * @see Component
- */
-@FragmentScope
-@Component(
-    modules = [AddBanksModule::class],
-    dependencies = [MainComponent::class])
-interface AddBanksComponent {
-
-    fun inject(addBankFragment: AddFragment)
-
-}
+@Entity(tableName = "BANKS_MENU")
+data class BankMenuCacheModel(
+    @PrimaryKey
+    var id: Int,
+    var menuItems: List<BankMenuModel>
+)

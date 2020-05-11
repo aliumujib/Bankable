@@ -50,6 +50,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation "androidx.room:room-ktx:$room_version"
     implementation 'io.cabriole:decorator:1.0.0'

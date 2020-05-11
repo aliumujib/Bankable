@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.data.cache.room
+package com.mnsons.offlinebank.data.cache.room.dao
 
-
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
-import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
-import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.mnsons.offlinebank.data.cache.room.entities.BankMenuCacheModel
 
+@Dao
+interface BankMenuDao {
 
-@Database(
-    entities = [BankCacheModel::class, BankMenuCacheModel::class],
-    version = 1, exportSchema = false
-)
-@TypeConverters(Converters::class)
-abstract class DBClass : RoomDatabase() {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(menus: List<BankMenuCacheModel>)
 
-    abstract fun banksDao(): BanksDao
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(menu: BankMenuCacheModel)
 
-    abstract fun bankMenuDao(): BankMenuDao
+    @Query("SELECT * FROM BANKS_MENU where id=:id")
+    suspend fun getBankMenu(id: Int): BankMenuCacheModel?
 
 }

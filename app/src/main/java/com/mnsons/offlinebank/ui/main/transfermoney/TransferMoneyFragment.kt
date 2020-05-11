@@ -2,18 +2,30 @@ package com.mnsons.offlinebank.ui.main.transfermoney
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.contracts.gtb.MoneyTransferContract
 import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
+import com.mnsons.offlinebank.ui.commons.dialogs.SelectFromMenuBottomSheet
 import com.mnsons.offlinebank.utils.ext.onBackPressed
+import javax.inject.Inject
 
 class TransferMoneyFragment : Fragment() {
 
     private lateinit var _binding: FragmentTransferMoneyBinding
+
+    @Inject
+    lateinit var transferMoneyViewModel: TransferMoneyViewModel
+
+    private val gtBankMoneyTransferMenu =
+        registerForActivityResult(MoneyTransferContract()) { result ->
+            Log.d("TTresult", result)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +43,15 @@ class TransferMoneyFragment : Fragment() {
         _binding.root.setOutAnimation(context, R.anim.nav_default_exit_anim)
 
         _binding.transferDetailsContainer.btnNext.setOnClickListener {
-            _binding.root.displayedChild = VIEW_SELECT_BANK
+            if (validateInput()) {
+                gtBankMoneyTransferMenu.launch(Unit)
+            } else {
+                "show error"
+            }
+        }
+
+        _binding.transferDetailsContainer.recipientBank.setOnClickListener {
+            openBankSelector()
         }
 
         _binding.selectBankContainer.btnNext.setOnClickListener {
@@ -63,12 +83,36 @@ class TransferMoneyFragment : Fragment() {
         }
     }
 
+    private fun validateInput(): Boolean {
+        return when {
+            _binding.transferDetailsContainer.accountNumber.text?.isEmpty() == true -> {
+                false
+            }
+            _binding.transferDetailsContainer.recipientBank.text?.isEmpty() == true -> {
+                false
+            }
+            _binding.transferDetailsContainer.etAmount.text?.isEmpty() == true -> {
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+
+    private fun openBankSelector() {
+        SelectFromMenuBottomSheet(transferMoneyViewModel.bankIds) { bank ->
+
+        }.show(childFragmentManager, javaClass.simpleName)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         onBackPressed {
             if (_binding.root.displayedChild == VIEW_ENTER_PIN
-                || _binding.root.displayedChild == VIEW_ENTER_PIN) {
+                || _binding.root.displayedChild == VIEW_ENTER_PIN
+            ) {
                 _binding.root.displayedChild = VIEW_ENTER_DETAILS
                 return@onBackPressed
             }
