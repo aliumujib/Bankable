@@ -7,7 +7,8 @@ concise good looking application.
 
 ### Goals
 - Significantly improve the UX of USSD in terms of accessibility and aesthetics.
-- Achieve very lean APK size
+- Achieve very lean APK size, currently at 6.3 MB with 2 bank integrations, can't go up much more than that even if we added more banks because we'd
+be adding only new contracts for the bank, and an SVG logo image for each bank.
 - Make intelligent use of Hover's SDK (Cut some corners though, for speed 🤣)
 - Aggregate USSD banking services in one place so the user doesn't have to remember them all.
 
