@@ -2,17 +2,14 @@ package com.mnsons.offlinebank.ui.main.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
@@ -36,12 +33,6 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     @Inject
     lateinit var homeViewModel: HomeViewModel
-
-    private val gtBankBalanceCall =
-        registerForActivityResult(CheckBankBalanceContract()) { result ->
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
-            Log.i("MyActivity", "Obtained result: $result")
-        }
 
     private lateinit var _binding: FragmentHomeBinding
 
@@ -143,7 +134,11 @@ class HomeFragment : Fragment(), MenuActionClickListener {
                 )
             }
             MenuAction.CheckAccountBalance -> {
-                //gtBankMenuCall.launch(Unit)
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToAccountBalanceFragment(
+                        bank
+                    )
+                )
             }
         }
     }

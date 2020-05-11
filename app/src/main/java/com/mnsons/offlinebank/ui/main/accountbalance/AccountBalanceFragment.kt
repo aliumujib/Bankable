@@ -2,7 +2,6 @@ package com.mnsons.offlinebank.ui.main.accountbalance
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentAccountBalanceBinding
+import com.mnsons.offlinebank.ui.commons.adapters.AccountBalanceAdapter
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.CheckBalanceUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
+import com.mnsons.offlinebank.utils.ext.slightDelay
+import kotlinx.android.synthetic.main.fragment_account_balance.*
 import javax.inject.Inject
 
 class AccountBalanceFragment : Fragment() {
@@ -24,10 +26,28 @@ class AccountBalanceFragment : Fragment() {
     @Inject
     lateinit var accountBalanceViewModel: AccountBalanceViewModel
 
+    private val accountBalanceAdapter by lazy { AccountBalanceAdapter() }
+
     private val accountBalanceCall =
         registerForActivityResult(CheckBankBalanceContract()) { result ->
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
-            Log.i(javaClass.simpleName, "Obtained result: $result")
+
+            if (result.data != null) {
+                Toast.makeText(context, result.data, Toast.LENGTH_SHORT).show()
+                val stringList =
+                    result.data?.split(')')
+                        ?.filter { it.contains("NGN") }
+                        ?.map {
+                            it.replace(":", "")
+                            it.replace("(","")
+                        }
+                stringList?.let {
+                    accountBalanceAdapter.all = it
+                    accountBalanceAdapter.notifyDataSetChanged()
+                    rvAccountBalances.visibility = View.VISIBLE
+                }
+            } else {
+                Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+            }
         }
 
     override fun onCreateView(
@@ -46,11 +66,15 @@ class AccountBalanceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accountBalanceViewModel.fetchAccountBalance()
+        slightDelay({
+            accountBalanceViewModel.fetchAccountBalance()
+        }, 1000)
 
         _binding.btnClose.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        _binding.rvAccountBalances.adapter = accountBalanceAdapter
 
         nonNullObserve(accountBalanceViewModel.state, ::handleStates)
     }

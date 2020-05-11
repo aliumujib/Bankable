@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.TransactionsCache
-import com.mnsons.offlinebank.model.toTransactionModel
 import com.mnsons.offlinebank.model.transaction.SectionedTransactionModel
 import com.mnsons.offlinebank.model.transaction.TransactionModel
 import kotlinx.coroutines.flow.launchIn
@@ -15,20 +14,15 @@ import java.util.*
 import javax.inject.Inject
 
 class DashboardViewModel @Inject constructor(
-    val transactionsCache: TransactionsCache
+    transactionsCache: TransactionsCache
 ) : ViewModel() {
 
     private val _state = MutableLiveData<DashboardState>()
     val state: LiveData<DashboardState> = _state
 
     init {
-        transactionsCache.getBanks().onEach {
-            _state.value =
-                DashboardState.Idle(
-                    generateSectionedTransactions(
-                        it.map { transactionCacheModel -> transactionCacheModel.toTransactionModel() }
-                    )
-                )
+        transactionsCache.getTransaction().onEach {
+            _state.value = DashboardState.Idle(generateSectionedTransactions(it))
         }.launchIn(viewModelScope)
     }
 

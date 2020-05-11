@@ -3,6 +3,7 @@ package com.mnsons.offlinebank.di.main.transferfunds
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
+import com.mnsons.offlinebank.data.cache.impl.TransactionsCache
 import com.mnsons.offlinebank.di.scopes.FragmentScope
 import com.mnsons.offlinebank.ui.main.transfermoney.TransferMoneyFragment
 import com.mnsons.offlinebank.ui.main.transfermoney.TransferMoneyViewModel
@@ -24,9 +25,10 @@ class TransferFundsModule(
     @FragmentScope
     @Provides
     fun providesTransferMoneyViewModel(
-        banksCache: BanksCache
+        banksCache: BanksCache,
+        transactionsCache: TransactionsCache
     ) = fragment.viewModel {
-        TransferMoneyViewModel(banksCache)
+        TransferMoneyViewModel(banksCache, transactionsCache)
     }
 
 }

@@ -19,6 +19,7 @@ import android.content.Context
 import com.mnsons.offlinebank.di.modules.ContextModule
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
+import com.mnsons.offlinebank.data.cache.impl.TransactionsCache
 import com.mnsons.offlinebank.di.modules.RemoteModule
 import com.mnsons.offlinebank.di.modules.UtilsModule
 import com.mnsons.offlinebank.di.modules.CacheModule
@@ -43,6 +44,8 @@ interface CoreComponent {
     fun context(): Context
 
     fun banksCache(): BanksCache
+
+    fun transactionsCache(): TransactionsCache
 
     fun settingsCache(): SettingsCache
 
