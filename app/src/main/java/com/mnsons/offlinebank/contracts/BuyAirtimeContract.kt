@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.model.BuyAirtimeModel
+import com.mnsons.offlinebank.model.buyairtime.BuyAirtimeModel
 import com.mnsons.offlinebank.utils.Constants
 import java.security.InvalidParameterException
 

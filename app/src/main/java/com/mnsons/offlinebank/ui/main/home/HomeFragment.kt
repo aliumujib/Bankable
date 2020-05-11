@@ -16,7 +16,7 @@ import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
-import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.model.bank.BankModel
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectBottomSheet
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction

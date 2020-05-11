@@ -15,10 +15,8 @@
  */
 package com.mnsons.offlinebank.data.cache.impl
 
-
 import android.content.Context
 import android.content.SharedPreferences
-
 
 open class CoreSharedPrefManager(context: Context) {
 
@@ -26,10 +24,10 @@ open class CoreSharedPrefManager(context: Context) {
         APP_NAME,
         Context.MODE_PRIVATE
     )
-    val sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
 
+    private val sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
 
-    protected fun delete(key: String) {
+    private fun delete(key: String) {
         if (sharedPreferences.contains(key)) {
             sharedPreferencesEditor.remove(key).commit()
         }
@@ -66,6 +64,6 @@ open class CoreSharedPrefManager(context: Context) {
 
 
     companion object {
-        const val APP_NAME = "EYOWO"
+        const val APP_NAME = "BANKABLE"
     }
 }

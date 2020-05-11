@@ -50,4 +50,5 @@
     <string name="transaction_n0t_successful">Transaction not Successful</string>
     <string name="success">Your transaction has been completed successfully</string>
 
+    <string name="all_banks">All Banks</string>
 </resources>

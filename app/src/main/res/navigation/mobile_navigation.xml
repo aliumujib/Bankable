@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_buy_airtime" >
         <argument
             android:name="bank"
-            app:argType="com.mnsons.offlinebank.model.BankModel" />
+            app:argType="com.mnsons.offlinebank.model.bank.BankModel" />
     </fragment>
 
     <fragment
@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_transfer_money" >
         <argument
             android:name="bank"
-            app:argType="com.mnsons.offlinebank.model.BankModel" />
+            app:argType="com.mnsons.offlinebank.model.bank.BankModel" />
     </fragment>
     <fragment
         android:id="@+id/accountBalanceFragment"
@@ -85,7 +85,7 @@
         tools:layout="@layout/fragment_account_balance" >
         <argument
             android:name="bank"
-            app:argType="com.mnsons.offlinebank.model.BankModel" />
+            app:argType="com.mnsons.offlinebank.model.bank.BankModel" />
     </fragment>
 
 </navigation>

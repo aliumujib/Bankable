@@ -1,8 +1,7 @@
-package com.mnsons.offlinebank.model
+package com.mnsons.offlinebank.model.bank
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

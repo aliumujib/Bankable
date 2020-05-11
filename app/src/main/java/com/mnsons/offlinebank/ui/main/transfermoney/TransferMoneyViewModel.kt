@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.model.BankMenuModel
-import com.mnsons.offlinebank.model.BuyAirtimeModel
 import com.mnsons.offlinebank.model.MoneyTransferModel
-import com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

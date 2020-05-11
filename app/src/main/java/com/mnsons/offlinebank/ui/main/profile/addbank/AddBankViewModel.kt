@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.model.*
+import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.model.user.UserModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -25,7 +27,7 @@ class AddBankViewModel @Inject constructor(
             banksCache.getBanks()
                 .onEach { banks ->
                     _state.value = AddBankState.Idle(
-                        User(
+                        UserModel(
                             settingsCache.fetchUserFirstName()!!,
                             settingsCache.fetchUserLastName()!!,
                             settingsCache.fetchUserPhone()!!,
@@ -44,7 +46,7 @@ class AddBankViewModel @Inject constructor(
         } else {
             if (settingsCache.userDataExists()) {
                 _state.value = AddBankState.Editing(
-                    User(
+                    UserModel(
                         settingsCache.fetchUserFirstName()!!,
                         settingsCache.fetchUserLastName()!!,
                         settingsCache.fetchUserPhone()!!,

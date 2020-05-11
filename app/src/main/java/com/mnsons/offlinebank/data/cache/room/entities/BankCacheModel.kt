@@ -17,7 +17,6 @@ package com.mnsons.offlinebank.data.cache.room.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mnsons.offlinebank.model.BankModel
 
 @Entity(tableName = "BANKS")
 data class BankCacheModel(

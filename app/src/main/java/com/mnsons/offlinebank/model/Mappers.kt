@@ -1,6 +1,7 @@
 package com.mnsons.offlinebank.model
 
 import com.mnsons.offlinebank.data.cache.room.entities.BankCacheModel
+import com.mnsons.offlinebank.model.bank.BankModel
 
 fun <I, O> List<I>.mapInto(function: (input: I) -> O): List<O> {
     return map {
