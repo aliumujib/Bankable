@@ -7,17 +7,22 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.model.BuyAirtimeModel
+import com.mnsons.offlinebank.utils.Constants
 import java.security.InvalidParameterException
 
-class CheckGTBankBalanceContract : ActivityResultContract<String, String>() {
+class BuyAirtimeContract : ActivityResultContract<BuyAirtimeModel, String>() {
 
     private lateinit var context: Context
 
-    override fun createIntent(context: Context, input: String?): Intent {
+    override fun createIntent(context: Context, input: BuyAirtimeModel?): Intent {
         this.context = context
+
         input?.let {
             return HoverParameters.Builder(context)
-                .request(it)
+                .request(it.actionId)
+                .extra(Constants.EXTRA_AMOUNT, it.amount)
+                .extra(Constants.EXTRA_PHONE_NUMBER, it.phoneNumber)
                 .buildIntent()
         } ?: throw InvalidParameterException("Please enter the correct parameters")
     }
@@ -29,9 +34,9 @@ class CheckGTBankBalanceContract : ActivityResultContract<String, String>() {
         val sessionTextArr: Array<String> =
             intent.getStringArrayExtra("session_messages") ?: emptyArray()
         sessionTextArr.forEach {
-            Log.d(CheckGTBankBalanceContract::class.java.simpleName, it)
+            Log.d(javaClass.simpleName, it)
         }
-        Log.d(CheckGTBankBalanceContract::class.java.simpleName, intent.toString())
+        Log.d(javaClass.simpleName, intent.toString())
 
         return if (sessionTextArr.isNotEmpty()) {
             sessionTextArr.last()

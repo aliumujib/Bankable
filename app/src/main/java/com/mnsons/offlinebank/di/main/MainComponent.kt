@@ -22,6 +22,8 @@ import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.di.components.CoreComponent
 import com.mnsons.offlinebank.di.scopes.ActivityScope
 import com.mnsons.offlinebank.ui.main.MainActivity
+import com.mnsons.offlinebank.ui.main.accountbalance.AccountBalanceFragment
+import com.mnsons.offlinebank.ui.main.buyairtime.BuyAirtimeFragment
 import com.mnsons.offlinebank.ui.main.profile.addbank.AddBankFragment
 import com.mnsons.offlinebank.ui.main.profile.userdetails.UserDetailsFragment
 import dagger.Component
@@ -49,5 +51,9 @@ interface MainComponent {
     fun inject(userDetailsFragment: UserDetailsFragment)
 
     fun inject(addBankFragment: AddBankFragment)
+
+    fun inject(buyAirtimeFragment: BuyAirtimeFragment)
+
+    fun inject(accountBalanceFragment: AccountBalanceFragment)
 
 }

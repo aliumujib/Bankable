@@ -1,10 +1,20 @@
 <resources>
     <!-- Application theme for dark theme. -->
-    <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<!--    <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/purple200</item>-->
+<!--        <item name="colorPrimaryDark">@color/purple700</item>-->
+<!--        <item name="colorAccent">@color/teal200</item>-->
+<!--    </style>-->
+
+    <!-- Base application theme. -->
+    <style name="Theme.OfflineBank" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple200</item>
-        <item name="colorPrimaryDark">@color/purple700</item>
-        <item name="colorAccent">@color/teal200</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/greyTransparent</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="fontFamily">@font/maisonneue_book</item>
+        <item name="android:textColor">@color/greyTextColor</item>
     </style>
 
 </resources>
