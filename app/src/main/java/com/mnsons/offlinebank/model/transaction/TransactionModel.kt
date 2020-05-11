@@ -11,11 +11,23 @@ data class TransactionModel(
 enum class TransactionType(val value: String) {
     BANK_TRANSFER("Bank Transfer"),
     AIRTIME_PURCHASE("Airtime Purchase"),
-    BALANCE_CHECK("Account Balance Check")
+    BALANCE_CHECK("Account Balance Check");
+
+    companion object {
+        @JvmStatic
+        fun fromString(category: String): TransactionType =
+            values().find { value -> value.value == category } ?: AIRTIME_PURCHASE
+    }
 }
 
 enum class TransactionStatus(val value: Int) {
     SUCCESS(1),
     PENDING(2),
-    FAILED(3)
+    FAILED(3);
+
+    companion object {
+        @JvmStatic
+        fun fromString(status: Int): TransactionStatus =
+            values().find { value -> value.value == status } ?: PENDING
+    }
 }

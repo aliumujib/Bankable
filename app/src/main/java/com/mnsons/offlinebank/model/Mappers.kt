@@ -29,8 +29,8 @@ fun TransactionCacheModel.toTransactionModel(): TransactionModel {
     return TransactionModel(
         amount,
         timestamp,
-        TransactionType.valueOf(type),
-        TransactionStatus.valueOf(status.toString()),
+        TransactionType.fromString(type),
+        TransactionStatus.fromString(status),
         bank
     )
 }
