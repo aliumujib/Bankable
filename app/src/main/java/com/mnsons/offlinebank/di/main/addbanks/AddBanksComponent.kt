@@ -18,7 +18,7 @@ package com.mnsons.offlinebank.di.main.addbanks
 
 import com.mnsons.offlinebank.di.main.MainComponent
 import com.mnsons.offlinebank.di.scopes.FragmentScope
-import com.mnsons.offlinebank.ui.main.profile.addbank.AddFragment
+import com.mnsons.offlinebank.ui.main.profile.addbank.AddBankFragment
 import dagger.Component
 
 /**
@@ -33,6 +33,6 @@ import dagger.Component
     dependencies = [MainComponent::class])
 interface AddBanksComponent {
 
-    fun inject(addBankFragment: AddFragment)
+    fun inject(addBankFragment: AddBankFragment)
 
 }

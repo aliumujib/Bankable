@@ -2,16 +2,21 @@ package com.mnsons.offlinebank.ui.main.transfermoney
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.gtb.MoneyTransferContract
+import com.mnsons.offlinebank.contracts.MoneyTransferContract
 import com.mnsons.offlinebank.databinding.FragmentTransferMoneyBinding
+import com.mnsons.offlinebank.di.main.transferfunds.DaggerTransferFundsComponent
+import com.mnsons.offlinebank.di.main.transferfunds.TransferFundsModule
 import com.mnsons.offlinebank.ui.commons.dialogs.SelectFromMenuBottomSheet
+import com.mnsons.offlinebank.ui.commons.dialogs.SuccessFailureDialog
+import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
+import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.onBackPressed
 import javax.inject.Inject
 
@@ -22,10 +27,24 @@ class TransferMoneyFragment : Fragment() {
     @Inject
     lateinit var transferMoneyViewModel: TransferMoneyViewModel
 
-    private val gtBankMoneyTransferMenu =
+    private val sourceBank: TransferMoneyFragmentArgs by navArgs()
+
+    private val moneyTransferContract =
         registerForActivityResult(MoneyTransferContract()) { result ->
-            Log.d("TTresult", result)
+            SuccessFailureDialog.display(
+                childFragmentManager,
+                result.data != null,
+                result.error ?: requireContext().getString(R.string.success)
+            )
         }
+
+    private fun injectDependencies() {
+        DaggerTransferFundsComponent.builder()
+            .mainComponent(mainComponent(requireActivity()))
+            .transferFundsModule(TransferFundsModule(this))
+            .build()
+            .inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,76 +58,53 @@ class TransferMoneyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        transferMoneyViewModel.fetchBankMenu(sourceBank.bank.id)
+
         _binding.root.setInAnimation(context, R.anim.nav_default_enter_anim)
         _binding.root.setOutAnimation(context, R.anim.nav_default_exit_anim)
 
         _binding.transferDetailsContainer.btnNext.setOnClickListener {
-            if (validateInput()) {
-                gtBankMoneyTransferMenu.launch(Unit)
-            } else {
-                "show error"
-            }
+            transferMoneyViewModel.initiateFundTransfer(
+                "75872765",
+                _binding.transferDetailsContainer.etAmount.text.toString(),
+                _binding.transferDetailsContainer.accountNumber.text.toString()
+            )
         }
 
         _binding.transferDetailsContainer.recipientBank.setOnClickListener {
             openBankSelector()
         }
+        nonNullObserve(transferMoneyViewModel.state, ::handleStates)
+    }
 
-        _binding.selectBankContainer.btnNext.setOnClickListener {
-            _binding.root.displayedChild = VIEW_ENTER_PIN
-        }
-
-        _binding.selectBankContainer.btnCancel.setOnClickListener {
-            _binding.root.displayedChild = VIEW_ENTER_DETAILS
-        }
-
-        _binding.transferPinContainer.btnNext.setOnClickListener {
-            _binding.root.displayedChild = VIEW_SAVE_BENEFICIARY
-        }
-
-        _binding.transferPinContainer.btnCancel.setOnClickListener {
-            _binding.root.displayedChild = VIEW_ENTER_DETAILS
-        }
-
-        _binding.saveTransferBeneficiaryContainer.btnCancel.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        _binding.saveTransferBeneficiaryContainer.btnYes.setOnClickListener {
-
-        }
-
-        _binding.saveTransferBeneficiaryContainer.btnNo.setOnClickListener {
-
+    private fun handleStates(transferMoneyState: TransferMoneyState) {
+        when (transferMoneyState) {
+            is TransferMoneyState.Initialize -> {
+                transferMoneyState.transferModel?.let {
+                    moneyTransferContract.launch(it)
+                }
+            }
+            is TransferMoneyState.Error -> {
+                Snackbar.make(
+                    _binding.root,
+                    transferMoneyState.error?.message.toString(),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    private fun validateInput(): Boolean {
-        return when {
-            _binding.transferDetailsContainer.accountNumber.text?.isEmpty() == true -> {
-                false
-            }
-            _binding.transferDetailsContainer.recipientBank.text?.isEmpty() == true -> {
-                false
-            }
-            _binding.transferDetailsContainer.etAmount.text?.isEmpty() == true -> {
-                false
-            }
-            else -> {
-                true
-            }
-        }
-    }
 
     private fun openBankSelector() {
         SelectFromMenuBottomSheet(transferMoneyViewModel.bankIds) { bank ->
-
+            _binding.transferDetailsContainer.recipientBank.setText(bank.bankName)
+            transferMoneyViewModel.setRecipientBank(bank.id)
         }.show(childFragmentManager, javaClass.simpleName)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
+        injectDependencies()
         onBackPressed {
             if (_binding.root.displayedChild == VIEW_ENTER_PIN
                 || _binding.root.displayedChild == VIEW_ENTER_PIN

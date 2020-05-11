@@ -9,7 +9,7 @@ import com.hover.sdk.api.HoverParameters
 import com.mnsons.offlinebank.R
 import java.security.InvalidParameterException
 
-class CheckGTBankBalanceContract : ActivityResultContract<String, String>() {
+class CheckBankBalanceContract : ActivityResultContract<String, String>() {
 
     private lateinit var context: Context
 
@@ -23,20 +23,20 @@ class CheckGTBankBalanceContract : ActivityResultContract<String, String>() {
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): String {
-        if (resultCode != Activity.RESULT_OK) return context.getString(R.string.error_fetching_gtbank_acc_balance)
-        if (intent == null) return context.getString(R.string.error_fetching_gtbank_acc_balance);
+        if (resultCode != Activity.RESULT_OK) return context.getString(R.string.error_index_)
+        if (intent == null) return context.getString(R.string.error_index_);
 
         val sessionTextArr: Array<String> =
             intent.getStringArrayExtra("session_messages") ?: emptyArray()
         sessionTextArr.forEach {
-            Log.d(CheckGTBankBalanceContract::class.java.simpleName, it)
+            Log.d(CheckBankBalanceContract::class.java.simpleName, it)
         }
-        Log.d(CheckGTBankBalanceContract::class.java.simpleName, intent.toString())
+        Log.d(CheckBankBalanceContract::class.java.simpleName, intent.toString())
 
         return if (sessionTextArr.isNotEmpty()) {
             sessionTextArr.last()
         } else {
-            context.getString(R.string.error_fetching_gtbank_acc_balance)
+            context.getString(R.string.error_index_)
         }
     }
 

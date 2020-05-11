@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.contracts.BuyAirtimeContract
 import com.mnsons.offlinebank.databinding.FragmentBuyAirtimeBinding
+import com.mnsons.offlinebank.ui.commons.dialogs.SuccessFailureDialog
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.BuyAirtimeUtil
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
@@ -26,7 +27,11 @@ class BuyAirtimeFragment : Fragment() {
 
     private val buyAirtimeCall =
         registerForActivityResult(BuyAirtimeContract()) { result ->
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
+            SuccessFailureDialog.display(
+                childFragmentManager,
+                result.data != null,
+                result.error ?: requireContext().getString(R.string.success)
+            )
             Log.i(javaClass.simpleName, "Obtained result: $result")
         }
 

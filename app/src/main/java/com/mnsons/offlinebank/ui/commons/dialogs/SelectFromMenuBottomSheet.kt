@@ -5,10 +5,9 @@ import android.view.View
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.model.BankMenuModel
 import com.mnsons.offlinebank.ui.commons.adapters.BankMenuAdapter
-import com.mnsons.offlinebank.ui.commons.adapters.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
 import com.mnsons.offlinebank.ui.commons.base.BaseRoundedBottomSheetDialogFragment
-import com.mnsons.offlinebank.utils.ext.delayForASecond
+import com.mnsons.offlinebank.utils.ext.slightDelay
 import kotlinx.android.synthetic.main.layout_select_bank_bottom_sheet.*
 
 class SelectFromMenuBottomSheet(
@@ -35,9 +34,9 @@ class SelectFromMenuBottomSheet(
     override fun select(item: BankMenuModel) {
         dismiss()
 
-        delayForASecond {
+        slightDelay({
             selectBankListener.invoke(item)
-        }
+        }, 200)
     }
 
     override fun deselect(item: BankMenuModel) {

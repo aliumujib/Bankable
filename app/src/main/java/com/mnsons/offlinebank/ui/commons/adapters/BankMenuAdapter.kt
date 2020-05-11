@@ -35,7 +35,7 @@ class BankMenuAdapter(
 
         fun bind(bank: BankMenuModel) {
             itemView.tvBankName.text = bank.bankName
-            itemView.ivBankLogo.setImageResource(R.drawable.ic_official_building)
+            itemView.ivBankLogo.setImageResource(R.drawable.ic_bank_logo)
             itemView.setOnClickListener {
                 selectionListener?.select(bank)
             }

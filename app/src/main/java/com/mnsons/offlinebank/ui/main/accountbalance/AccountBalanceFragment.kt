@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.mnsons.offlinebank.contracts.CheckGTBankBalanceContract
+import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentAccountBalanceBinding
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.CheckBalanceUtil
@@ -25,7 +25,7 @@ class AccountBalanceFragment : Fragment() {
     lateinit var accountBalanceViewModel: AccountBalanceViewModel
 
     private val accountBalanceCall =
-        registerForActivityResult(CheckGTBankBalanceContract()) { result ->
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
             Toast.makeText(context, result, Toast.LENGTH_LONG).show()
             Log.i(javaClass.simpleName, "Obtained result: $result")
         }

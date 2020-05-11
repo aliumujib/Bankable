@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
-import com.mnsons.offlinebank.contracts.gtb.CheckGTBankBalanceContract
+import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
@@ -38,7 +38,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
     lateinit var homeViewModel: HomeViewModel
 
     private val gtBankBalanceCall =
-        registerForActivityResult(CheckGTBankBalanceContract()) { result ->
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
             Toast.makeText(context, result, Toast.LENGTH_LONG).show()
             Log.i("MyActivity", "Obtained result: $result")
         }
