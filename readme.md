@@ -24,7 +24,7 @@ concise good looking application.
 We had a lot of fun building this. There are some improvements we intend to make.
 
 - Write tests. </br>
-- Further explore the `Activity Result APIs` as a means of abstracting Hover SDK logic from activities and fragments for a cleaner experience</br>
+- Further explore the `Activity Result API` as a means of further abstracting Hover SDK logic from activities and fragments for a cleaner dev experience</br>
 - Improve success/error parsing logic with parsers</br>
 - Add more banks</br>
 
