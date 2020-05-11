@@ -121,16 +121,9 @@ fun checkIfIsMarshMallow(): Boolean {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 }
 
-fun delayForASecond(function: () -> Unit) {
+fun slightDelay(function: () -> Unit, timeOut:Long = 1000) {
     val handler = Handler()
     handler.postDelayed({
         function.invoke()
-    }, 1000)
-}
-
-fun delayFor2Seconds(function: () -> Unit) {
-    val handler = Handler()
-    handler.postDelayed({
-        function.invoke()
-    }, 2000)
+    }, timeOut)
 }

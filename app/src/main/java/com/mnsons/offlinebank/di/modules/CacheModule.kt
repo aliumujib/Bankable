@@ -20,6 +20,7 @@ import androidx.room.Room
 import com.mnsons.offlinebank.data.cache.impl.BanksCache
 import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.data.cache.room.DBClass
+import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
 import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,13 @@ class CacheModule {
     @Provides
     fun providesBanksDao(dBClass: DBClass): BanksDao {
         return dBClass.banksDao()
+    }
+
+
+    @Singleton
+    @Provides
+    fun providesBankMenuDao(dBClass: DBClass): BankMenuDao {
+        return dBClass.bankMenuDao()
     }
 
     @Singleton

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_bank.view.*
 
 class BankSelectionAdapter(
     private val viewType: ViewType = ViewType.NORMAL,
-    private val bankSelectionListener: BankSelectionListener<BankModel>? = null
+    private val selectionListener: SelectionListener<BankModel>? = null
 ) : RecyclerView.Adapter<BankSelectionAdapter.BankItemViewHolder>() {
 
     var all: List<BankModel> = mutableListOf()
@@ -69,9 +69,9 @@ class BankSelectionAdapter(
 
                 itemView.setOnClickListener {
                     if (isSelected) {
-                        bankSelectionListener?.deselect(bank)
+                        selectionListener?.deselect(bank)
                     } else {
-                        bankSelectionListener?.select(bank)
+                        selectionListener?.select(bank)
                     }
                 }
             } else {

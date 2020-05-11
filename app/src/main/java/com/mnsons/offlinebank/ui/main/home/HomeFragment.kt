@@ -2,18 +2,22 @@ package com.mnsons.offlinebank.ui.main.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.mnsons.offlinebank.R
+import com.mnsons.offlinebank.contracts.CheckBankBalanceContract
 import com.mnsons.offlinebank.databinding.FragmentHomeBinding
 import com.mnsons.offlinebank.di.main.home.DaggerHomeComponent
 import com.mnsons.offlinebank.di.main.home.HomeModule
-import com.mnsons.offlinebank.ui.commons.dialogs.SelectBankBottomSheet
+import com.mnsons.offlinebank.model.BankModel
+import com.mnsons.offlinebank.ui.commons.dialogs.SelectBottomSheet
 import com.mnsons.offlinebank.ui.main.MainActivity.Companion.mainComponent
 import com.mnsons.offlinebank.ui.main.home.menu.MenuAction
 import com.mnsons.offlinebank.ui.main.home.menu.MenuActionClickListener
@@ -29,6 +33,15 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var homeViewModel: HomeViewModel
+
+    private val gtBankBalanceCall =
+        registerForActivityResult(CheckBankBalanceContract()) { result ->
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show()
+            Log.i("MyActivity", "Obtained result: $result")
+        }
 
     private lateinit var _binding: FragmentHomeBinding
 
@@ -53,6 +66,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return _binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,6 +108,7 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     }
 
+
     private fun handleStates(mainState: MainState) {
         if (mainState is MainState.Idle) {
             mainState.user?.let {
@@ -105,29 +120,31 @@ class HomeFragment : Fragment(), MenuActionClickListener {
 
     override fun onMenuActionClick(model: MenuAction) {
         mainViewModel.state.value?.user?.banks?.let {
-            SelectBankBottomSheet(it) { bank ->
-                when (model) {
-                    MenuAction.BuyAirtime -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionNavigationHomeToNavigationBuyAirtime(
-                                bank
-                            )
-                        )
-                    }
-                    MenuAction.TransferFunds -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionNavigationHomeToNavigationTransferMoney(
-                                bank
-                            )
-                        )
-                    }
-                    MenuAction.CheckAccountBalance -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionNavigationHomeToAccountBalanceFragment(bank)
-                        )
-                    }
-                }
+            SelectBottomSheet(it) { bank ->
+                navigate(model, bank)
             }.show(childFragmentManager, javaClass.simpleName)
+        }
+    }
+
+    private fun navigate(model: MenuAction, bank: BankModel) {
+        when (model) {
+            MenuAction.BuyAirtime -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToNavigationBuyAirtime(
+                        bank
+                    )
+                )
+            }
+            MenuAction.TransferFunds -> {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionNavigationHomeToNavigationTransferMoney(
+                        bank
+                    )
+                )
+            }
+            MenuAction.CheckAccountBalance -> {
+                //gtBankMenuCall.launch(Unit)
+            }
         }
     }
 

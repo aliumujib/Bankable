@@ -13,26 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mnsons.offlinebank.di.main.addbanks
+package com.mnsons.offlinebank.data.cache.room.dao
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.mnsons.offlinebank.data.cache.room.entities.BankMenuCacheModel
 
-import com.mnsons.offlinebank.di.main.MainComponent
-import com.mnsons.offlinebank.di.scopes.FragmentScope
-import com.mnsons.offlinebank.ui.main.profile.addbank.AddBankFragment
-import dagger.Component
+@Dao
+interface BankMenuDao {
 
-/**
- * Class for which a fully-formed, dependency-injected implementation is to
- * be generated from [AddBanksModule].
- *
- * @see Component
- */
-@FragmentScope
-@Component(
-    modules = [AddBanksModule::class],
-    dependencies = [MainComponent::class])
-interface AddBanksComponent {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(menus: List<BankMenuCacheModel>)
 
-    fun inject(addBankFragment: AddBankFragment)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(menu: BankMenuCacheModel)
+
+    @Query("SELECT * FROM BANKS_MENU where id=:id")
+    suspend fun getBankMenu(id: Int): BankMenuCacheModel?
 
 }

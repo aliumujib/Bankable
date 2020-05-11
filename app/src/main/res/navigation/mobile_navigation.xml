@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/navigation_add_bank"
-        android:name="com.mnsons.offlinebank.ui.main.profile.addbank.AddBankFragment"
+        android:name="com.mnsons.offlinebank.ui.main.profile.addbank.AddFragment"
         android:label="Add a Bank"
         tools:layout="@layout/fragment_add_bank" />
 
