@@ -25,10 +25,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
 @Module
+@InstallIn(ApplicationComponent::class)
 class CacheModule {
 
 
@@ -53,7 +54,7 @@ class CacheModule {
 
     @Singleton
     @Provides
-    fun providesDB(context: Context): DBClass {
+    fun providesDB(@ApplicationContext context: Context): DBClass {
         return Room.databaseBuilder(
             context.applicationContext,
             DBClass::class.java, "mandsons_database"

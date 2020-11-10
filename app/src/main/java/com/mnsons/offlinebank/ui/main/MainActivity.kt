@@ -29,9 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
-   private val mainViewModel: MainViewModel by viewModels()
-
+    private val mainViewModel: MainViewModel by viewModels()
 
     private val topLevelDestinationIds = setOf(
         R.id.navigation_home,

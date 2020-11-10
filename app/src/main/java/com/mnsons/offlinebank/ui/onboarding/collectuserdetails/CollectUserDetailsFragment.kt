@@ -16,7 +16,9 @@ import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingState
 import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingViewModel
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CollectUserDetailsFragment : Fragment(R.layout.fragment_collect_user_details) {
 
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()

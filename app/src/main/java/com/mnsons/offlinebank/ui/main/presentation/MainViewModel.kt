@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class MainViewModel @ViewModelInject constructor(
-    val settingsCache: SettingsCache,
-    val banksCache: BanksCache
+    private val settingsCache: SettingsCache,
+    private val banksCache: BanksCache
 ) : ViewModel() {
 
     private val _state = MutableLiveData<MainState>()

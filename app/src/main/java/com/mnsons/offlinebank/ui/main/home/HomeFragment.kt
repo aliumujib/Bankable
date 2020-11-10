@@ -25,13 +25,11 @@ import com.mnsons.offlinebank.utils.ext.showSnackbar
 import com.mnsons.offlinebank.utils.ext.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.cabriole.decorator.GridSpanMarginDecoration
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), MenuActionClickListener {
 
     private val mainViewModel: MainViewModel by activityViewModels()
-
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
 
     private val accountBalanceCall =
@@ -98,7 +96,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MenuActionClickListener {
 
         menuAdapter.submitList(modelList)
 
-        nonNullObserve(mainViewModel.state, ::handleStates)
+       nonNullObserve(mainViewModel.state, ::handleStates)
 
     }
 
@@ -106,8 +104,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MenuActionClickListener {
     private fun handleStates(mainState: MainState) {
         if (mainState is MainState.Idle) {
             mainState.user?.let {
-                binding.nameIntro.text =
-                    requireContext().getString(R.string.home_hello_intro, it.firstName)
+                binding.nameIntro.text = requireContext().getString(R.string.home_hello_intro, it.firstName)
             }
         }
     }
