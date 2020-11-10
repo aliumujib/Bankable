@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
-    val mainViewModel: MainViewModel by viewModels()
+   private val mainViewModel: MainViewModel by viewModels()
 
 
     private val topLevelDestinationIds = setOf(
