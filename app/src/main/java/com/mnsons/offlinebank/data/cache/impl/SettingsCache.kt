@@ -1,9 +1,10 @@
 package com.mnsons.offlinebank.data.cache.impl
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class SettingsCache @Inject constructor(val context: Context) : CoreSharedPrefManager(context) {
+class SettingsCache @Inject constructor(@ApplicationContext val context: Context) : CoreSharedPrefManager(context) {
 
     fun fetchUserFirstName(): String? {
         return getPref(USER_FIRST_NAME)

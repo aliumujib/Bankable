@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.buyairtime
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class BuyAirtimeViewModel @Inject constructor(private val transactionsCache: TransactionsCache) :
+class BuyAirtimeViewModel @ViewModelInject constructor(private val transactionsCache: TransactionsCache) :
     ViewModel() {
 
     lateinit var bank: BankModel

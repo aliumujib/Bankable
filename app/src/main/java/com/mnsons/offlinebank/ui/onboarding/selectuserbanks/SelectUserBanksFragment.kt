@@ -1,37 +1,30 @@
 package com.mnsons.offlinebank.ui.onboarding.selectuserbanks
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
-import com.mnsons.offlinebank.ApplicationClass
-import com.mnsons.offlinebank.ui.main.MainActivity
+import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentSelectUserBanksBinding
-import com.mnsons.offlinebank.di.onboarding.DaggerOnBoardingComponent
-import com.mnsons.offlinebank.di.onboarding.OnBoardingModule
-import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
 import com.mnsons.offlinebank.model.bank.BankModel
+import com.mnsons.offlinebank.ui.commons.adapters.SelectionListener
 import com.mnsons.offlinebank.ui.commons.adapters.bank.BankSelectionAdapter
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
-import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
+import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingState
 import com.mnsons.offlinebank.ui.onboarding.presentation.OnBoardingViewModel
 import com.mnsons.offlinebank.utils.ext.observe
+import com.mnsons.offlinebank.utils.ext.viewBinding
 import kotlinx.android.synthetic.main.fragment_select_user_banks.*
-import javax.inject.Inject
 
-class SelectUserBanksFragment : Fragment(),
-    SelectionListener<BankModel> {
+class SelectUserBanksFragment : Fragment(R.layout.fragment_select_user_banks), SelectionListener<BankModel> {
 
-    private lateinit var _binding: FragmentSelectUserBanksBinding
+    private val binding: FragmentSelectUserBanksBinding by viewBinding(FragmentSelectUserBanksBinding::bind)
 
-    @Inject
-    lateinit var onBoardingViewModel: OnBoardingViewModel
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
 
     private var bankTransferMenuIndexer: BankTransferMenuIndexer = BankTransferMenuIndexer(
@@ -54,46 +47,23 @@ class SelectUserBanksFragment : Fragment(),
         }
     }
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        injectDependencies()
-    }
-
-    private fun injectDependencies() {
-        DaggerOnBoardingComponent
-            .builder()
-            .coreComponent(ApplicationClass.coreComponent(requireContext()))
-            .onBoardingModule(OnBoardingModule(requireActivity() as OnBoardingActivity))
-            .build()
-            .inject(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSelectUserBanksBinding.inflate(inflater, container, false)
-        return _binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        _binding.rvBanks.adapter = bankSelectionAdapter
+        binding.rvBanks.adapter = bankSelectionAdapter
 
-        _binding.searchContainer.setOnClickListener {
-            _binding.searchHint.visibility = View.GONE
-            _binding.searchBar.isIconified = !search_bar.isIconified
+        binding.searchContainer.setOnClickListener {
+            binding.searchHint.visibility = View.GONE
+            binding.searchBar.isIconified = !search_bar.isIconified
         }
 
-        _binding.searchBar.setOnCloseListener {
-            _binding.searchHint.visibility = View.VISIBLE
+        binding.searchBar.setOnCloseListener {
+            binding.searchHint.visibility = View.VISIBLE
             return@setOnCloseListener false
         }
 
-        _binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -106,7 +76,7 @@ class SelectUserBanksFragment : Fragment(),
             }
         })
 
-        _binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             onBoardingViewModel.setUserBanks(bankSelectionAdapter.selected)
         }
 
@@ -123,11 +93,11 @@ class SelectUserBanksFragment : Fragment(),
                 bankTransferMenuIndexer.indexMenuForBanks(bankSelectionAdapter.selected)
             }
             is OnBoardingState.Editing -> {
-                _binding.tvFirstName.text = "${onBoardingState.user?.firstName},"
+                binding.tvFirstName.text = "${onBoardingState.user?.firstName},"
             }
             is OnBoardingState.Error -> {
                 Snackbar.make(
-                    _binding.root,
+                    binding.root,
                     onBoardingState.error?.message.toString(),
                     Snackbar.LENGTH_LONG
                 ).show()

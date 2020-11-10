@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.transfermoney
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.*
 
-class TransferMoneyViewModel(
+class TransferMoneyViewModel @ViewModelInject constructor(
     private val bankCache: BanksCache,
     private val transactionsCache: TransactionsCache
 ) : ViewModel() {

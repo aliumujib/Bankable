@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.profile.addbank
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddBankViewModel @Inject constructor(
+class AddBankViewModel @ViewModelInject constructor(
     val settingsCache: SettingsCache,
     val banksCache: BanksCache
 ) : ViewModel() {

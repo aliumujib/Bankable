@@ -10,10 +10,13 @@ import androidx.fragment.app.FragmentManager
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentAccountBalanceBinding
 import com.mnsons.offlinebank.ui.commons.adapters.AccountBalanceAdapter
+import com.mnsons.offlinebank.utils.ext.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AccountBalanceFragment(private val accountBalances: List<String>) : DialogFragment() {
 
-    private lateinit var _binding: FragmentAccountBalanceBinding
+    private val binding: FragmentAccountBalanceBinding by viewBinding(FragmentAccountBalanceBinding::bind)
 
     private var dialogView: View? = null
 
@@ -48,11 +51,9 @@ class AccountBalanceFragment(private val accountBalances: List<String>) : Dialog
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        _binding = FragmentAccountBalanceBinding.inflate(inflater)
-
         disableBackClick()
 
-        return _binding.root
+        return binding.root
     }
 
     private fun disableBackClick() {
@@ -71,12 +72,12 @@ class AccountBalanceFragment(private val accountBalances: List<String>) : Dialog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding.btnClose.setOnClickListener {
+        binding.btnClose.setOnClickListener {
             onCloseClickListener?.invoke()
             dismiss()
         }
 
-        _binding.rvAccountBalances.adapter = accountBalanceAdapter
+        binding.rvAccountBalances.adapter = accountBalanceAdapter
     }
 
     override fun onDestroyView() {

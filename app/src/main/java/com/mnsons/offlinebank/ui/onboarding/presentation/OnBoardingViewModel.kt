@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.onboarding.presentation
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +14,7 @@ import com.mnsons.offlinebank.model.user.UserModel
 import com.mnsons.offlinebank.ui.commons.banks.BanksPopulator
 import kotlinx.coroutines.launch
 
-class OnBoardingViewModel constructor(
+class OnBoardingViewModel @ViewModelInject constructor(
     val settingsCache: SettingsCache,
     val banksCache: BanksCache
 ) : ViewModel() {
