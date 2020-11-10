@@ -36,7 +36,7 @@ class BanksCache @Inject constructor(
 
     fun getBankMenu(id: Int): Flow<List<BankMenuModel>> {
         return flow {
-            emit(bankMenuDao.getBankMenu(id)?.menuItems ?: emptyList())
+            //emit(bankMenuDao.getBankMenu(id)?.menuItems ?: emptyList())
         }
     }
 
