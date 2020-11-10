@@ -1,10 +1,10 @@
 package com.mnsons.offlinebank.ui.main
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -14,29 +14,24 @@ import androidx.navigation.ui.setupWithNavController
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.Hover.DownloadListener
-import com.hover.sdk.api.HoverParameters
-import com.mnsons.offlinebank.ApplicationClass.Companion.coreComponent
 import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.ActivityMainBinding
-import com.mnsons.offlinebank.di.main.DaggerMainComponent
-import com.mnsons.offlinebank.di.main.MainComponent
-import com.mnsons.offlinebank.di.main.MainModule
 import com.mnsons.offlinebank.ui.main.presentation.MainState
 import com.mnsons.offlinebank.ui.main.presentation.MainViewModel
 import com.mnsons.offlinebank.ui.onboarding.OnBoardingActivity
 import com.mnsons.offlinebank.utils.ext.*
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    @Inject
-    lateinit var mainViewModel: MainViewModel
 
-    lateinit var mainComponent: MainComponent
+    val mainViewModel: MainViewModel by viewModels()
+
 
     private val topLevelDestinationIds = setOf(
         R.id.navigation_home,
@@ -46,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injectDependencies()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -75,16 +69,6 @@ class MainActivity : AppCompatActivity() {
         if (mainState is MainState.LoggedOut) {
             startActivity(Intent(this, OnBoardingActivity::class.java))
         }
-    }
-
-    private fun injectDependencies() {
-        mainComponent = DaggerMainComponent
-            .builder()
-            .coreComponent(coreComponent(this))
-            .mainModule(MainModule(this))
-            .build()
-
-        mainComponent.inject(this)
     }
 
     inner class DestinationChangeListener : NavController.OnDestinationChangedListener {
@@ -133,18 +117,6 @@ class MainActivity : AppCompatActivity() {
         if (binding.navView.visibility != View.VISIBLE) {
             binding.navView.slideUp()
         }
-    }
-
-    companion object {
-
-        /**
-         * Obtain Main activity component.
-         *
-         * @param activity The activity
-         */
-        @JvmStatic
-        fun mainComponent(activity: Activity) =
-            (activity as? MainActivity)?.mainComponent
     }
 
 }

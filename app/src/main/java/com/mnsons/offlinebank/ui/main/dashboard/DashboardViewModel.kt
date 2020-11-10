@@ -1,5 +1,6 @@
 package com.mnsons.offlinebank.ui.main.dashboard
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class DashboardViewModel @Inject constructor(
+class DashboardViewModel @ViewModelInject constructor(
     transactionsCache: TransactionsCache
 ) : ViewModel() {
 

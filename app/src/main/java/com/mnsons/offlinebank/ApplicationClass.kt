@@ -16,11 +16,6 @@
 package com.mnsons.offlinebank
 
 import android.app.Application
-import android.content.Context
-import com.mnsons.offlinebank.di.app.DaggerApplicationComponent
-import com.mnsons.offlinebank.di.components.CoreComponent
-import com.mnsons.offlinebank.di.components.DaggerCoreComponent
-import com.mnsons.offlinebank.di.modules.ContextModule
 import dagger.hilt.android.HiltAndroidApp
 
 
@@ -31,5 +26,5 @@ class ApplicationClass : Application() {
         super.onCreate()
 
     }
-    
+
 }

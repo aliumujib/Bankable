@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.mnsons.offlinebank.R
 import com.mnsons.offlinebank.databinding.FragmentDashboardBinding
 import com.mnsons.offlinebank.model.transaction.TransactionType
 import com.mnsons.offlinebank.ui.commons.adapters.transaction.SectionedTransactionsAdapter
@@ -14,12 +16,14 @@ import com.mnsons.offlinebank.ui.commons.adapters.transaction.TransactionsAdapte
 import com.mnsons.offlinebank.ui.main.MainActivity
 import com.mnsons.offlinebank.utils.ext.nonNullObserve
 import com.mnsons.offlinebank.utils.ext.showSnackbar
+import com.mnsons.offlinebank.utils.ext.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class DashboardFragment : Fragment() {
+@AndroidEntryPoint
+class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
-    @Inject
-    lateinit var dashboardViewModel: DashboardViewModel
+    private val dashboardViewModel: DashboardViewModel by viewModels()
 
     private val transactionsAdapter by lazy { TransactionsAdapter() }
 
@@ -27,21 +31,12 @@ class DashboardFragment : Fragment() {
         SectionedTransactionsAdapter(transactionsAdapter)
     }
 
-    private lateinit var _binding: FragmentDashboardBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        return _binding.root
-    }
-
+    private val binding: FragmentDashboardBinding by viewBinding(FragmentDashboardBinding::bind)
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding.rvSectionedTransactions.adapter = sectionedTransactionsAdapter
+        binding.rvSectionedTransactions.adapter = sectionedTransactionsAdapter
 
         nonNullObserve(dashboardViewModel.state, ::handleStates)
     }
@@ -55,26 +50,17 @@ class DashboardFragment : Fragment() {
 
                     val allTransactions = it.flatMap { it.transactions }
 
-                    _binding.tvBankTransferAmount.text = "N " + allTransactions.filter {
+                    binding.tvBankTransferAmount.text = "N " + allTransactions.filter {
                         it.type == TransactionType.BANK_TRANSFER
                     }.sumByDouble { it.amount }.toString()
 
-                    _binding.tvAirtimePurchaseAmount.text = "N " + allTransactions.filter {
+                    binding.tvAirtimePurchaseAmount.text = "N " + allTransactions.filter {
                         it.type == TransactionType.AIRTIME_PURCHASE
                     }.sumByDouble { it.amount }.toString()
                 }
             }
             is DashboardState.Error -> showSnackbar(dashboardState.error?.message.toString())
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        injectDependencies()
-    }
-
-    private fun injectDependencies() {
-        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
 }

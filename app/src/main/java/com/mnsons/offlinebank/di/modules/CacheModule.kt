@@ -17,17 +17,17 @@ package com.mnsons.offlinebank.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.mnsons.offlinebank.data.cache.impl.BanksCache
-import com.mnsons.offlinebank.data.cache.impl.SettingsCache
 import com.mnsons.offlinebank.data.cache.room.DBClass
 import com.mnsons.offlinebank.data.cache.room.dao.BankMenuDao
 import com.mnsons.offlinebank.data.cache.room.dao.BanksDao
 import com.mnsons.offlinebank.data.cache.room.dao.TransactionsDao
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
-
+@InstallIn(ApplicationComponent::class)
 @Module
 class CacheModule {
 
