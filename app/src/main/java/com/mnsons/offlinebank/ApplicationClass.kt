@@ -21,50 +21,15 @@ import com.mnsons.offlinebank.di.app.DaggerApplicationComponent
 import com.mnsons.offlinebank.di.components.CoreComponent
 import com.mnsons.offlinebank.di.components.DaggerCoreComponent
 import com.mnsons.offlinebank.di.modules.ContextModule
+import dagger.hilt.android.HiltAndroidApp
 
 
+@HiltAndroidApp
 class ApplicationClass : Application() {
-
-    lateinit var coreComponent: CoreComponent
 
     override fun onCreate() {
         super.onCreate()
 
-        initCoreDependencyInjection()
-        initAppDependencyInjection()
     }
-
-    /**
-     * Initialize core dependency injection component.
-     */
-    private fun initAppDependencyInjection() {
-        DaggerApplicationComponent
-            .builder()
-            .coreComponent(coreComponent)
-            .build()
-            .inject(this)
-    }
-
-    /**
-     * Initialize core dependency injection component.
-     */
-    private fun initCoreDependencyInjection() {
-        coreComponent = DaggerCoreComponent
-            .builder()
-            .contextModule(ContextModule(this))
-            .build()
-    }
-
-    companion object {
-
-        /**
-         * Obtain core dagger component.
-         *
-         * @param context The application context
-         */
-        @JvmStatic
-        fun coreComponent(context: Context) =
-            (context.applicationContext as? ApplicationClass)?.coreComponent
-    }
-
+    
 }
