@@ -29,7 +29,7 @@ We had a lot of fun building this. There are some improvements we intend to make
 - Add more banks</br>
 
 
-### Team (MnSons)
+### Team
 - [Abdul-Mujeeb Aliu](https://github.com/aliumujib).
 - [Quadri Anifowose](https://github.com/Quadriyanney).
 - [Olusesan Peter](https://sesan.design).
